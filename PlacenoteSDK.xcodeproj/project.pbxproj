@@ -11,6 +11,10 @@
 		2A08D58D20054BC900D7F0CE /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A08D58C20054BC900D7F0CE /* CameraManager.swift */; };
 		2AA0A2451FEB7EC400F4944D /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AA0A2441FEB7EB900F4944D /* AssetsLibrary.framework */; };
 		2AFFA66420068963000239D3 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFFA66320068963000239D3 /* MulticastDelegate.swift */; };
+		32F36D18779877BBDFABC3CF /* Pods_PlacenoteSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1EC137DF313585A5F9A8C15 /* Pods_PlacenoteSDKTests.framework */; };
+		4C3730B569A799EEF6F3CDBD /* Pods_PlacenoteSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 824BB58D59A697F7B9AE9BAB /* Pods_PlacenoteSDK.framework */; };
+		69E6832FCCFF49903C1B7F4A /* Pods_PlacenoteSDKUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E1B12A939FA97CF71B86304 /* Pods_PlacenoteSDKUITests.framework */; };
+		6A270202204203D100F260B2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6A270201204203D100F260B2 /* GoogleService-Info.plist */; };
 		A2BB047C200FE340005A9E5F /* Placenote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BB047B200FE340005A9E5F /* Placenote.framework */; };
 		A2BB047D200FE3A5005A9E5F /* Placenote.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = A2BB047B200FE340005A9E5F /* Placenote.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AF4A60311FEA379E00CE91D9 /* ShapeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4A60301FEA379E00CE91D9 /* ShapeManager.swift */; };
@@ -55,12 +59,20 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		07A842A0AE4943737DF5731E /* Pods-PlacenoteSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlacenoteSDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-PlacenoteSDK/Pods-PlacenoteSDK.release.xcconfig"; sourceTree = "<group>"; };
 		2A08D58A20053FDA00D7F0CE /* FeaturePointVisualizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturePointVisualizer.swift; sourceTree = "<group>"; };
 		2A08D58C20054BC900D7F0CE /* CameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
 		2AA0A2441FEB7EB900F4944D /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		2AFFA65F200563DB000239D3 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		2AFFA66320068963000239D3 /* MulticastDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
+		5AC47C12EED8B8A795EE2B78 /* Pods-PlacenoteSDKUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlacenoteSDKUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PlacenoteSDKUITests/Pods-PlacenoteSDKUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		62FA889862B8174D9E80611C /* Pods-PlacenoteSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlacenoteSDK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PlacenoteSDK/Pods-PlacenoteSDK.debug.xcconfig"; sourceTree = "<group>"; };
+		6A270201204203D100F260B2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6E1B12A939FA97CF71B86304 /* Pods_PlacenoteSDKUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlacenoteSDKUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8041472B962C64D730D7AA86 /* Pods-PlacenoteSDKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlacenoteSDKTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PlacenoteSDKTests/Pods-PlacenoteSDKTests.debug.xcconfig"; sourceTree = "<group>"; };
+		824BB58D59A697F7B9AE9BAB /* Pods_PlacenoteSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlacenoteSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2BB047B200FE340005A9E5F /* Placenote.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Placenote.framework; sourceTree = "<group>"; };
+		A62BC52EF7E298A3238D3BDC /* Pods-PlacenoteSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlacenoteSDKTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PlacenoteSDKTests/Pods-PlacenoteSDKTests.release.xcconfig"; sourceTree = "<group>"; };
 		AF4A60301FEA379E00CE91D9 /* ShapeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeManager.swift; sourceTree = "<group>"; };
 		AF5C90982008200A005F3090 /* Data.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = Data.bin; sourceTree = "<group>"; };
 		AF7A14A01F5A00AE00E0507A /* PlacenoteSDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlacenoteSDK.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,6 +87,8 @@
 		AFEE51181FEA3D6F004AEFEE /* PlacenoteSDK-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PlacenoteSDK-Bridging-Header.h"; sourceTree = "<group>"; };
 		AFEE51191FF56370004AEFEE /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; tabWidth = 2; };
 		AFEE511B1FF563C1004AEFEE /* LibPlacenote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibPlacenote.swift; sourceTree = "<group>"; };
+		B1EC137DF313585A5F9A8C15 /* Pods_PlacenoteSDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlacenoteSDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C12B20E6B29D156F1B360D1A /* Pods-PlacenoteSDKUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlacenoteSDKUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PlacenoteSDKUITests/Pods-PlacenoteSDKUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +98,7 @@
 			files = (
 				A2BB047C200FE340005A9E5F /* Placenote.framework in Frameworks */,
 				2AA0A2451FEB7EC400F4944D /* AssetsLibrary.framework in Frameworks */,
+				4C3730B569A799EEF6F3CDBD /* Pods_PlacenoteSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,6 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32F36D18779877BBDFABC3CF /* Pods_PlacenoteSDKTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,6 +114,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69E6832FCCFF49903C1B7F4A /* Pods_PlacenoteSDKUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +126,9 @@
 			children = (
 				2AFFA65F200563DB000239D3 /* libstdc++.tbd */,
 				2AA0A2441FEB7EB900F4944D /* AssetsLibrary.framework */,
+				824BB58D59A697F7B9AE9BAB /* Pods_PlacenoteSDK.framework */,
+				B1EC137DF313585A5F9A8C15 /* Pods_PlacenoteSDKTests.framework */,
+				6E1B12A939FA97CF71B86304 /* Pods_PlacenoteSDKUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -119,6 +139,7 @@
 				AF7A14A21F5A00AE00E0507A /* PlacenoteSDK */,
 				AF7A14A11F5A00AE00E0507A /* Products */,
 				2ADDEB971FE8647B00A7F317 /* Frameworks */,
+				E13F4B592FC2D3D169114B13 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -145,6 +166,7 @@
 				AF7A14AE1F5A00AE00E0507A /* LaunchScreen.storyboard */,
 				AF7A14B11F5A00AE00E0507A /* Info.plist */,
 				AF7A14D31F5A15E100E0507A /* ShapeType.swift */,
+				6A270201204203D100F260B2 /* GoogleService-Info.plist */,
 			);
 			path = PlacenoteSDK;
 			sourceTree = "<group>";
@@ -162,6 +184,19 @@
 			path = PNSDK;
 			sourceTree = "<group>";
 		};
+		E13F4B592FC2D3D169114B13 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				62FA889862B8174D9E80611C /* Pods-PlacenoteSDK.debug.xcconfig */,
+				07A842A0AE4943737DF5731E /* Pods-PlacenoteSDK.release.xcconfig */,
+				8041472B962C64D730D7AA86 /* Pods-PlacenoteSDKTests.debug.xcconfig */,
+				A62BC52EF7E298A3238D3BDC /* Pods-PlacenoteSDKTests.release.xcconfig */,
+				5AC47C12EED8B8A795EE2B78 /* Pods-PlacenoteSDKUITests.debug.xcconfig */,
+				C12B20E6B29D156F1B360D1A /* Pods-PlacenoteSDKUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -169,10 +204,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AF7A14CA1F5A00AE00E0507A /* Build configuration list for PBXNativeTarget "PlacenoteSDK" */;
 			buildPhases = (
+				7C4D669F951B7F0721C3248E /* [CP] Check Pods Manifest.lock */,
 				AF7A149C1F5A00AE00E0507A /* Sources */,
 				AF7A149D1F5A00AE00E0507A /* Frameworks */,
 				AF7A149E1F5A00AE00E0507A /* Resources */,
 				A291F6A3200E888B000883C3 /* CopyFiles */,
+				2FFB2BCACA2F4E9B75DB82E5 /* [CP] Embed Pods Frameworks */,
+				C6891015C6B800E07F40925D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -187,9 +225,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AF7A14CD1F5A00AE00E0507A /* Build configuration list for PBXNativeTarget "PlacenoteSDKTests" */;
 			buildPhases = (
+				1E95B3EC4B557CA327A0BE66 /* [CP] Check Pods Manifest.lock */,
 				AF7A14B21F5A00AE00E0507A /* Sources */,
 				AF7A14B31F5A00AE00E0507A /* Frameworks */,
 				AF7A14B41F5A00AE00E0507A /* Resources */,
+				2A8C474A0CD5A81900D6D17A /* [CP] Embed Pods Frameworks */,
+				5DD6E8DA84A0B336E9581652 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -205,9 +246,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AF7A14D01F5A00AE00E0507A /* Build configuration list for PBXNativeTarget "PlacenoteSDKUITests" */;
 			buildPhases = (
+				0CA0369C48C48A94DFEEA0D5 /* [CP] Check Pods Manifest.lock */,
 				AF7A14BD1F5A00AE00E0507A /* Sources */,
 				AF7A14BE1F5A00AE00E0507A /* Frameworks */,
 				AF7A14BF1F5A00AE00E0507A /* Resources */,
+				8E8E91FC6A97D54B27E352F9 /* [CP] Embed Pods Frameworks */,
+				DB488B73C04742AB3CDE08B4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -226,7 +270,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "Vertical AI";
 				TargetAttributes = {
 					AF7A149F1F5A00AE00E0507A = {
@@ -270,6 +314,7 @@
 			files = (
 				AF7A14B01F5A00AE00E0507A /* LaunchScreen.storyboard in Resources */,
 				AF5C90992008200A005F3090 /* Data.bin in Resources */,
+				6A270202204203D100F260B2 /* GoogleService-Info.plist in Resources */,
 				AF7A14AD1F5A00AE00E0507A /* Assets.xcassets in Resources */,
 				AF7A14AB1F5A00AE00E0507A /* Main.storyboard in Resources */,
 			);
@@ -290,6 +335,158 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0CA0369C48C48A94DFEEA0D5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PlacenoteSDKUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1E95B3EC4B557CA327A0BE66 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PlacenoteSDKTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2A8C474A0CD5A81900D6D17A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PlacenoteSDKTests/Pods-PlacenoteSDKTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2FFB2BCACA2F4E9B75DB82E5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-PlacenoteSDK/Pods-PlacenoteSDK-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PlacenoteSDK/Pods-PlacenoteSDK-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5DD6E8DA84A0B336E9581652 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PlacenoteSDKTests/Pods-PlacenoteSDKTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7C4D669F951B7F0721C3248E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PlacenoteSDK-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8E8E91FC6A97D54B27E352F9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PlacenoteSDKUITests/Pods-PlacenoteSDKUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C6891015C6B800E07F40925D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PlacenoteSDK/Pods-PlacenoteSDK-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DB488B73C04742AB3CDE08B4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PlacenoteSDKUITests/Pods-PlacenoteSDKUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		AF7A149C1F5A00AE00E0507A /* Sources */ = {
@@ -377,6 +574,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
@@ -434,6 +633,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
@@ -465,11 +666,11 @@
 		};
 		AF7A14CB1F5A00AE00E0507A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 62FA889862B8174D9E80611C /* Pods-PlacenoteSDK.debug.xcconfig */;
 			buildSettings = {
-				ARCHS = arm64;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = Q595V6WXLX;
+				DEVELOPMENT_TEAM = 9V35X4Z333;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -484,8 +685,8 @@
 					"$(PROJECT_DIR)/PlacenoteSDK",
 					"$(PROJECT_DIR)/PlacenoteSDK/PNSDK",
 				);
-				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.starcity.Placenote;
+				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.starcity.Spacenotes1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_OBJC_BRIDGING_HEADER = "PlacenoteSDK/PlacenoteSDK-Bridging-Header.h";
@@ -497,11 +698,11 @@
 		};
 		AF7A14CC1F5A00AE00E0507A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 07A842A0AE4943737DF5731E /* Pods-PlacenoteSDK.release.xcconfig */;
 			buildSettings = {
-				ARCHS = arm64;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = Q595V6WXLX;
+				DEVELOPMENT_TEAM = 9V35X4Z333;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -516,8 +717,8 @@
 					"$(PROJECT_DIR)/PlacenoteSDK",
 					"$(PROJECT_DIR)/PlacenoteSDK/PNSDK",
 				);
-				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.starcity.Placenote;
+				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.starcity.Spacenotes1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_OBJC_BRIDGING_HEADER = "PlacenoteSDK/PlacenoteSDK-Bridging-Header.h";
@@ -528,6 +729,7 @@
 		};
 		AF7A14CE1F5A00AE00E0507A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8041472B962C64D730D7AA86 /* Pods-PlacenoteSDKTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -543,6 +745,7 @@
 		};
 		AF7A14CF1F5A00AE00E0507A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A62BC52EF7E298A3238D3BDC /* Pods-PlacenoteSDKTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -558,6 +761,7 @@
 		};
 		AF7A14D11F5A00AE00E0507A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5AC47C12EED8B8A795EE2B78 /* Pods-PlacenoteSDKUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = PunchARUITests/Info.plist;
@@ -572,6 +776,7 @@
 		};
 		AF7A14D21F5A00AE00E0507A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C12B20E6B29D156F1B360D1A /* Pods-PlacenoteSDKUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = PunchARUITests/Info.plist;
