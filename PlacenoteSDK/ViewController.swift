@@ -9,6 +9,7 @@
 import UIKit
 import SceneKit
 import ARKit
+import FirebaseDatabase
 
 
 class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UITableViewDelegate, UITableViewDataSource, PNDelegate {
@@ -72,7 +73,19 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     newMapButton.isEnabled = false
     showPNLabel.isHidden = true
     showPNSelection.isHidden = true
+    
+    // Firebase experimentation
 
+//    let key = DatabaseManager.instance.ref.child("posts").childByAutoId().key
+//    let post = ["uid": "jalehman",
+//                "author": "Josh",
+//                "title": "Test Post"]
+//    let childUpdates  = ["/posts/\(key)": post,
+//                         "/user-posts/jalehman/\(key)": post]
+//    DatabaseManager.instance.ref.updateChildValues(childUpdates)
+    Map.fetch(id: "-L68iOanOJLZ4clwpqw4") { (map) in
+      print ("The map name is: \(map.name)")
+    }
   }
 
   //Initialize view and scene
