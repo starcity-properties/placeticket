@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SceneKit
 
 public enum ShapeType:Int {
   
@@ -52,4 +53,3 @@ public enum ShapeType:Int {
     return geometry
   }
 }
-

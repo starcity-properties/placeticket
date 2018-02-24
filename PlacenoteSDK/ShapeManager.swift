@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SceneKit
 
 extension String {
   func appendLineToURL(fileURL: URL) throws {
@@ -55,7 +56,7 @@ class ShapeManager {
   private var shapeNodes: [SCNNode] = []
   
   public var shapesDrawn: Bool! = false
-
+  
   
   init(scene: SCNScene, view: SCNView) {
     scnScene = scene

@@ -105,7 +105,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     scnView.debugOptions = []
     mapTable.isHidden = true //hide the map list until 'Load Map' is clicked
 
-    //scnView.debugOptions = ARSCNDebugOptions.showFeaturePoints
+    scnView.debugOptions = ARSCNDebugOptions.showFeaturePoints
     //scnView.debugOptions = ARSCNDebugOptions.showWorldOrigin
   }
 
@@ -295,6 +295,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
           else {
             self.statusLabel.text = "Map Loaded. Shape file not found"
           }
+
+//          LibPlacenote.instance.stopSession() // NOTE: Doing this screws stuff up
           LibPlacenote.instance.startSession()
           self.tapRecognizer?.isEnabled = true
         } else if (faulted) {

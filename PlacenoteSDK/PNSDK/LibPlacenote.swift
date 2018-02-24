@@ -576,6 +576,7 @@ class LibPlacenote {
         if let data = newMapList?.data(using: .utf8) {
           do {
             placeArray = (try JSONSerialization.jsonObject(with: data, options: []) as? [String: NSArray])!
+
             let placeIds = placeArray["places"]!
             if (placeIds.count > 0) {
               for i in 0...(placeIds.count-1) {
