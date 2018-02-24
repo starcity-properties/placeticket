@@ -41,6 +41,10 @@ class Map {
     }
   }
   
+  static func fetchAll(cb: @escaping ([Map]) -> ()) {
+    
+  }
+  
   private func createData() -> [String: Any] {
     return ["placenoteId": self.placenoteId,
             "name": self.name]
