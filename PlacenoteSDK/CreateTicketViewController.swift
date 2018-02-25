@@ -47,10 +47,14 @@ class CreateTicketViewController: UIViewController, ARSCNViewDelegate, ARSession
     LibPlacenote.instance.multiDelegate += self;
     
     statusLabel.text = "Retrieving mapId: " + map!.id
-    
+    if LibPlacenote.instance.initialized() {
+      LibPlacenote.instance.startSession()
+    }
+
     LibPlacenote.instance.loadMap(
       mapId: map!.id,
       downloadProgressCb: {(completed: Bool, faulted: Bool, percentage: Float) -> Void in
+        print (percentage)
         if (completed) {
           self.mappingStarted = false
           self.mappingComplete = false
@@ -74,7 +78,6 @@ class CreateTicketViewController: UIViewController, ARSCNViewDelegate, ARSession
         }
     }
     )
-    // Do any additional setup after loading the view.
   }
   
   override func viewWillAppear(_ animated: Bool) {
