@@ -218,6 +218,7 @@ class ShapeManager {
       node.geometry!.firstMaterial!.diffuse.contents = nil
     }
     ticketLookup = [:]
+    tickets = []
     shapeNodes.removeAll()
     shapePositions.removeAll()
     shapeTypes.removeAll()
@@ -225,7 +226,7 @@ class ShapeManager {
   
 
   func placeIcon (position: SCNVector3, color: UIColor = blueColor()) {
-    
+    print ("Can place shape? \(shapeNodes.count < maxShapes)", position)
     if shapeNodes.count < maxShapes {
       let geometryNode: SCNNode = createIcon(position: position, color: color)
       let geometryNode2: SCNNode = createCircle(position: position, color: color)

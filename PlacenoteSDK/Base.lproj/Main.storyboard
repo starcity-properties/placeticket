@@ -461,6 +461,10 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xjf-ds-2Cb" customClass="CancelButton" customModule="PlacenoteSDK" customModuleProvider="target">
+                                        <rect key="frame" x="143" y="453" width="90" height="92"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -491,6 +495,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="cancelButton" destination="xjf-ds-2Cb" id="G1a-ha-wiq"/>
                         <outlet property="scnView" destination="zul-FD-6TT" id="quf-zq-Lr8"/>
                         <outlet property="statusLabel" destination="n6b-9m-3se" id="swR-lF-aUp"/>
                     </connections>
