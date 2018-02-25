@@ -28,16 +28,19 @@ class TicketDetailViewController: UIViewController, ARSCNViewDelegate, ARSession
   
   // AR Scene
   private var scnScene: SCNScene!
+  private var actualScnView: SCNView!
   
   //Status variables to track the state of the app with respect to libPlacenote
   private var trackingStarted: Bool = false;
   private var mappingStarted: Bool = false;
   private var mappingComplete: Bool = false;
   private var localizationStarted: Bool = false;
+
   
   private var shapeManager: ShapeManager!
-  private var tapRecognizer: UITapGestureRecognizer? = nil //initialized after view is loaded
-  
+  private var tapRecognizer: UITapGestureRecognizer? //initialized after view is loaded
+  private var tapRec: UITapGestureRecognizer? //initialized after view is loaded
+
   
   // PlacenoteSDK features & helpers
   private var camManager: CameraManager? = nil;
@@ -56,6 +59,8 @@ class TicketDetailViewController: UIViewController, ARSCNViewDelegate, ARSession
     tapRecognizer!.numberOfTapsRequired = 1
     tapRecognizer!.isEnabled = false
     scnView.addGestureRecognizer(tapRecognizer!)
+    tapRec = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
+    actualScnView.addGestureRecognizer(tapRec!)
     
     // set Placenote delegate
     LibPlacenote.instance.multiDelegate.addDelegate(delegate: self)
@@ -113,6 +118,7 @@ class TicketDetailViewController: UIViewController, ARSCNViewDelegate, ARSession
   
   //Function to setup the view and setup the AR Scene including options
   func setupView() {
+    actualScnView = self.scnView as! SCNView
     scnView.showsStatistics = true
     scnView.autoenablesDefaultLighting = true
     scnView.delegate = self
@@ -237,17 +243,44 @@ class TicketDetailViewController: UIViewController, ARSCNViewDelegate, ARSession
     self.delegate?.ticketDetailDone(viewController: self)
   }
   
-  @objc func handleTap(sender: UITapGestureRecognizer) {
-    if sender.state == .ended {
-      let tapLocation = sender.location(in: scnView)
-      let hitTestResults = scnView.hitTest(tapLocation, types: .featurePoint)
-      
-      if let result = hitTestResults.first {
-        let pose = LibPlacenote.instance.processPose(pose: result.worldTransform)
-        shapeManager.placeIcon(position: pose.position())
-      }
+    @objc func handleTap(sender: UITapGestureRecognizer) {
+        
+        // let tapLocation = sender.location(in: scnView)
+        // let hitTestResults = scnView.hitTest(tapLocation, types: .featurePoint)
+        
+        
+        // if let result = hitTestResults.first {
+        //   let pose = LibPlacenote.instance.processPose(pose: result.worldTransform)
+        //   shapeManager.placeIcon(position: pose.position())
+        
+        //   for shapeNode in shapeManager.shapeNodes {
+        //     if (detectCollision(first: shapeNode.position, second: pose.position())) {
+        //       print ("PRINT ---------------------------------------------- collision!")
+        //     }
+        //   }
+        
+        if sender.state == .ended {
+            let location = sender.location(in: actualScnView)
+            let hits = actualScnView.hitTest(location, options: nil)
+            
+            if !hits.isEmpty && hits.first?.node.geometry?.materials != nil {
+                let tappedNode = hits.first?.node
+                print("============== I'M TAPPED ===================")
+            }
+        }
     }
-  }
+    
+//  @objc func handleTap(sender: UITapGestureRecognizer) {
+//    if sender.state == .ended {
+//      let tapLocation = sender.location(in: scnView)
+//      let hitTestResults = scnView.hitTest(tapLocation, types: .featurePoint)
+//
+//      if let result = hitTestResults.first {
+//        let pose = LibPlacenote.instance.processPose(pose: result.worldTransform)
+//        shapeManager.placeIcon(position: pose.position())
+//      }
+//    }
+//  }
   
   //  @IBAction func done(_ sender: Any) {
   //    //    self.dismiss(animated: true, completion: nil)
