@@ -10,7 +10,7 @@ import Foundation
 import FirebaseDatabase
 
 class Map {
-
+  
   var id: String
   var placenoteId: String
   var name: String
@@ -36,12 +36,11 @@ class Map {
     }
   }
   
-  static func create(placenoteId: String, name: String) -> Map {
+  static func create(placenoteId: String, name: String) {
     let key = DatabaseManager.instance.ref.child("maps").childByAutoId().key
     let map = Map(id: key, placenoteId: placenoteId, name: name)
     let updates = ["/maps/\(key)": map.createData()]
     DatabaseManager.instance.ref.updateChildValues(updates)
-    return map
   }
   
   static func fetch(id: String, cb: @escaping (Map) -> ()) {
@@ -50,20 +49,19 @@ class Map {
       value = value![id] as? NSDictionary
       let placenoteId = value!["placenoteId"] as? String ?? "unknown"
       let name = value!["name"] as? String ?? "unknown"
-      print ("The value is:\(value)")
       cb(Map(id: id, placenoteId: placenoteId, name: name))
     }
   }
-    
-
-    static func fetchByName(name: String) {
-        let map = DatabaseManager.instance.ref?.child("maps").queryEqual(toValue: name)
-        print("map fetched by name is: ", map)
-    }
-    
-  static func fetchAll(cb: @escaping ([Map]) -> ()) {
-    
-  }
+  
+  
+//  static func fetchByName(name: String) {
+//    let map = DatabaseManager.instance.ref?.child("maps").queryEqual(toValue: name)
+//
+//  }
+//
+//  static func fetchAll(cb: @escaping ([Map]) -> ()) {
+//
+//  }
   
   private func createData() -> [String: Any] {
     return ["placenoteId": self.placenoteId,

@@ -60,17 +60,34 @@ class ShapeManager {
   
   private var scnScene: SCNScene!
   private var scnView: SCNView!
+  private var map: Map!
   
   private var shapePositions: [SCNVector3] = []
+  private var maxShapes: Int = 1
   private var shapeTypes: [ShapeType] = []
   var shapeNodes: [SCNNode] = []
   
   public var shapesDrawn: Bool! = false
   
   
-  init(scene: SCNScene, view: SCNView) {
-    scnScene = scene
-    scnView = view
+  init(map: Map, scene: SCNScene, view: SCNView) {
+    self.map = map
+    self.scnScene = scene
+    self.scnView = view
+  }
+  
+  func setMaxShapes(max: Int) {
+    self.maxShapes = max
+  }
+  
+  // TODO:
+  func saveShapes() {
+    if (shapePositions.count > 0) {
+      for i in 0...(shapePositions.count-1) {
+        Ticket.create(map: self.map, content: "this is a ticket", x: shapePositions[i].x, y: shapePositions[i].y, z: shapePositions[i].z)
+      }
+    }
+    
   }
   
   //Save JSON File of Shapes with MapID as its name
@@ -101,7 +118,14 @@ class ShapeManager {
       return;
     }
     
-    
+  }
+  
+  func loadShapes(tickets: [Ticket]) {
+    for ticket in tickets {
+      let position: SCNVector3 = SCNVector3(x: ticket.x, y: ticket.y, z: ticket.z)
+      shapePositions.append(position)
+      shapeNodes.append(createIcon(position: position, color: ticket.statusColor()))
+    }
   }
   
   //Retrieve JSON file with a certain mapid name
@@ -123,14 +147,13 @@ class ShapeManager {
       guard let shapeArray = try JSONSerialization.jsonObject(with: data, options: []) as? [[String: [String: String]]] else { return false }
       for item in shapeArray {
         
-        let status = "???"   //////////////////////////////////////////////////////////////////////////// THIS IS WHY IT'S BLUE
         let x_string: String = item["shape"]!["x"]!
         let y_string: String = item["shape"]!["y"]!
         let z_string: String = item["shape"]!["z"]!
         let position: SCNVector3 = SCNVector3(x: Float(x_string)!, y: Float(y_string)!, z: Float(z_string)!)
         let type: ShapeType = ShapeType(rawValue: Int(item["shape"]!["style"]!)!)!
         shapePositions.append(position)
-        shapeNodes.append(createIcon(position: position, status: status))
+        shapeNodes.append(createIcon(position: position, color: blueColor()))
         
         print ("Shape Manager: Retrieved " + String(describing: type) + " type at position" + String (describing: position))
       }
@@ -180,48 +203,42 @@ class ShapeManager {
     shapeTypes.removeAll()
   }
   
-  
-  
 
-  func placeIcon (position: SCNVector3) {
+  func placeIcon (position: SCNVector3, color: UIColor = blueColor()) {
     
-    let geometryNode: SCNNode = createIcon(position: position, status: "CHANGE ME")
-    
-//    let camera = self.scnView.pointOfView!
-//    let position = SCNVector3(x: 0, y: 0, z: -1)
-//    geometryNode.position = camera.convertPosition(position, to: nil)
-//    geometryNode.rotation = camera.rotation
-    
-//    camera.addChildNode(geometryNode)
-    
-//    let cameraNode = self.scnView.pointOfView
-//    print(cameraNode?.position)
-//    geometryNode.eulerAngles.z = 1.5087
-//    let action = SCNAction.rotateBy(x: CGFloat(2 * Double.pi), y: 0, z: 0, duration: 10)
-//    let repAction = SCNAction.repeatForever(action)
-//    geometryNode.runAction(repAction, forKey: "myrotate")
+    if shapeNodes.count <= maxShapes {
+      let geometryNode: SCNNode = createIcon(position: position, color: color)
+      
+      //    let camera = self.scnView.pointOfView!
+      //    let position = SCNVector3(x: 0, y: 0, z: -1)
+      //    geometryNode.position = camera.convertPosition(position, to: nil)
+      //    geometryNode.rotation = camera.rotation
+      
+      //    camera.addChildNode(geometryNode)
+      
+      //    let cameraNode = self.scnView.pointOfView
+      //    print(cameraNode?.position)
+      //    geometryNode.eulerAngles.z = 1.5087
+      //    let action = SCNAction.rotateBy(x: CGFloat(2 * Double.pi), y: 0, z: 0, duration: 10)
+      //    let repAction = SCNAction.repeatForever(action)
+      //    geometryNode.runAction(repAction, forKey: "myrotate")
+      
+      
+      shapePositions.append(position)
+      shapeNodes.append(geometryNode)
+      
+      scnScene.rootNode.addChildNode(geometryNode)
+      shapesDrawn = true
 
-    
-    shapePositions.append(position)
-    shapeNodes.append(geometryNode)
-    
-    scnScene.rootNode.addChildNode(geometryNode)
-    shapesDrawn = true
+    }
   }
 
   
-  func createIcon (position: SCNVector3, status: String) -> SCNNode {
+  func createIcon (position: SCNVector3, color: UIColor) -> SCNNode {
     let exclShape = SCNText(string: "!", extrusionDepth: 0.2)
 //    let exclShape2 = SCNTorus(ringRadius: 1.0, pipeRadius: 0.1)
     exclShape.font = UIFont(name: "Helvetica", size: 2)
-    
-    var color = blueColor()
-    
-    if status == "Pending" {
-      color = redColor()
-    } else if status == "Assigned" {
-      color = yellowColor()
-    }
+
     
     let exclGeometry:SCNGeometry = exclShape
     exclGeometry.materials.first?.diffuse.contents = color

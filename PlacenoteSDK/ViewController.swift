@@ -54,7 +54,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     setupScene()
 
     //App Related initializations
-    shapeManager = ShapeManager(scene: scnScene, view: scnView)
+    shapeManager = ShapeManager(map: Map(id: "abc", placenoteId: "def", name: "ghi"), scene: scnScene, view: scnView)
     tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
     tapRecognizer!.numberOfTapsRequired = 1
     tapRecognizer!.isEnabled = false

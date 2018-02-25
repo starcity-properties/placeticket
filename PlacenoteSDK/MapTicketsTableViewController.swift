@@ -8,11 +8,12 @@
 
 import UIKit
 
-class MapTicketsTableViewController: UITableViewController, CreateTicketViewControllerDelegate {
+class MapTicketsTableViewController: UITableViewController, CreateTicketViewControllerDelegate, TicketDetailViewControllerDelegate {
   
   var map: Map?
   
   private var tickets: [Ticket] = []
+  private var selectedTicket: Ticket?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -65,7 +66,27 @@ class MapTicketsTableViewController: UITableViewController, CreateTicketViewCont
     // Configure the cell...
     
     return cell
-    
+  }
+  
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    selectedTicket = self.tickets[indexPath.row]
+    performSegue(withIdentifier: "showTicketDetailSegue", sender: self)
+  }
+  
+  // MARK: - TicketDetailViewController
+  
+  func ticketDetailDone(viewController: TicketDetailViewController) {
+    viewController.dismiss(animated: true, completion: nil)
+  }
+  
+  func ticketDetailTickets(viewController: TicketDetailViewController) -> [Ticket] {
+    return self.tickets
+  }
+  
+  // MARK: - CreateTicketViewController
+  
+  func createTickedDidFinish(viewController: CreateTicketViewController) {
+    viewController.dismiss(animated: true, completion: nil)
   }
   
   func createTicketDidCancel(viewController: CreateTicketViewController) {
@@ -116,6 +137,11 @@ class MapTicketsTableViewController: UITableViewController, CreateTicketViewCont
     if segue.identifier == "createTicketSegue" {
       let navigationController = segue.destination as! UINavigationController
       let vc = navigationController.topViewController as! CreateTicketViewController
+      vc.delegate = self
+      vc.map = self.map
+    } else if segue.identifier == "showTicketDetailSegue" {
+      let navigationController = segue.destination as! UINavigationController
+      let vc = navigationController.topViewController as! TicketDetailViewController
       vc.delegate = self
       vc.map = self.map
     }

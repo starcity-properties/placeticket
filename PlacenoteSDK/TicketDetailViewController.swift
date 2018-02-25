@@ -1,8 +1,8 @@
 //
-//  CreateTicketViewController.swift
+//  TicketDetailViewController.swift
 //  PlacenoteSDK
 //
-//  Created by Josh Lehman on 2/24/18.
+//  Created by Josh Lehman on 2/25/18.
 //  Copyright © 2018 Vertical AI. All rights reserved.
 //
 
@@ -10,20 +10,21 @@ import UIKit
 import ARKit
 import SceneKit
 
-protocol CreateTicketViewControllerDelegate {
-  func createTicketDidCancel(viewController: CreateTicketViewController)
-  func createTickedDidFinish(viewController: CreateTicketViewController)
+protocol TicketDetailViewControllerDelegate {
+  func ticketDetailDone(viewController: TicketDetailViewController)
+  func ticketDetailTickets(viewController: TicketDetailViewController) -> [Ticket]
 }
 
-class CreateTicketViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, PNDelegate {
-  
+class TicketDetailViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, PNDelegate {
+
   @IBOutlet weak var scnView: ARSCNView!
   @IBOutlet weak var statusLabel: UILabel!
   
   var map: Map?
+//  var tickets: [Ticket] = []
   
   // Delegate
-  var delegate: CreateTicketViewControllerDelegate?
+  var delegate: TicketDetailViewControllerDelegate?
   
   // AR Scene
   private var scnScene: SCNScene!
@@ -36,7 +37,7 @@ class CreateTicketViewController: UIViewController, ARSCNViewDelegate, ARSession
   
   private var shapeManager: ShapeManager!
   private var tapRecognizer: UITapGestureRecognizer? = nil //initialized after view is loaded
-
+  
   
   // PlacenoteSDK features & helpers
   private var camManager: CameraManager? = nil;
@@ -61,21 +62,27 @@ class CreateTicketViewController: UIViewController, ARSCNViewDelegate, ARSession
     
     statusLabel.text = "Retrieving mapId: " + map!.placenoteId
     
-    loadMap(map: self.map!)
   }
   
-  func loadMap(map: Map) {
+  @IBAction func reloadMap(_ sender: Any) {
+    loadMap(map: self.map!, tickets: self.delegate!.ticketDetailTickets(viewController: self))
+  }
+  
+  func loadMap(map: Map, tickets: [Ticket]) {
+    LibPlacenote.instance.stopSession()
+    print ("LOADING MAP", tickets, map)
     LibPlacenote.instance.loadMap(
       mapId: map.placenoteId,
       downloadProgressCb: {(completed: Bool, faulted: Bool, percentage: Float) -> Void in
-        print (percentage)
+        print (completed, faulted, percentage)
         if (completed) {
           self.mappingStarted = false
           self.mappingComplete = false
           self.localizationStarted = true
           self.statusLabel.text = "Map Loaded. Look Around"
+          self.shapeManager.loadShapes(tickets: tickets)
+          print ("LOADING TICKETS:::::::::::::::::::::::::::: \(tickets)")
           LibPlacenote.instance.startSession()
-          self.shapeManager.loadShapes(tickets: [])
           self.tapRecognizer?.isEnabled = true
         } else if (faulted) {
           print ("Couldnt load map: " + self.map!.id)
@@ -89,6 +96,7 @@ class CreateTicketViewController: UIViewController, ARSCNViewDelegate, ARSession
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+    
     
     // Create a session configuration
     let configuration = ARWorldTrackingConfiguration()
@@ -112,7 +120,7 @@ class CreateTicketViewController: UIViewController, ARSCNViewDelegate, ARSession
     scnView.isPlaying = true
     scnView.debugOptions = []
     
-//    scnView.debugOptions = ARSCNDebugOptions.showFeaturePoints
+    //    scnView.debugOptions = ARSCNDebugOptions.showFeaturePoints
 //    scnView.debugOptions = ARSCNDebugOptions.showWorldOrigin
   }
   
@@ -223,15 +231,10 @@ class CreateTicketViewController: UIViewController, ARSCNViewDelegate, ARSession
   
   // MARK: - UI Control Handlers
   
-  @IBAction func cancel(_ sender: Any) {
+  @IBAction func done(_ sender: Any) {
     LibPlacenote.instance.stopSession()
     LibPlacenote.instance.multiDelegate.removeDelegate(delegate: self)
-    self.delegate?.createTicketDidCancel(viewController: self)
-  }
-  
-  @IBAction func save(_ sender: Any) {
-    self.shapeManager.saveShapes()
-    self.delegate?.createTickedDidFinish(viewController: self)
+    self.delegate?.ticketDetailDone(viewController: self)
   }
   
   @objc func handleTap(sender: UITapGestureRecognizer) {
@@ -276,5 +279,5 @@ class CreateTicketViewController: UIViewController, ARSCNViewDelegate, ARSession
    // Pass the selected object to the new view controller.
    }
    */
-  
+
 }
