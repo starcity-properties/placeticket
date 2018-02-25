@@ -189,6 +189,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="pcP-FG-IsK">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="wwf-Fd-HUd">
+                            <connections>
+                                <action selector="back:" destination="MJk-Us-tBk" id="aAW-q5-i4u"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="FSA-4v-Qx8">
                             <connections>
                                 <action selector="newTicket:" destination="MJk-Us-tBk" id="0hM-jh-0sh"/>
@@ -257,7 +262,13 @@
                             <constraint firstItem="zul-FD-6TT" firstAttribute="top" secondItem="mq3-RN-dna" secondAttribute="bottom" id="yV2-43-fYv"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="New Ticket" id="A9E-du-5dr"/>
+                    <navigationItem key="navigationItem" title="New Ticket" id="A9E-du-5dr">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="cXl-J8-oFk">
+                            <connections>
+                                <action selector="cancel:" destination="PB1-DJ-fIf" id="M2b-L8-Dkm"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="scnView" destination="zul-FD-6TT" id="quf-zq-Lr8"/>
                         <outlet property="statusLabel" destination="n6b-9m-3se" id="swR-lF-aUp"/>

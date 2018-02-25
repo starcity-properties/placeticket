@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MapTicketsTableViewController: UITableViewController {
+class MapTicketsTableViewController: UITableViewController, CreateTicketViewControllerDelegate {
   
   var map: Map?
   
@@ -30,6 +30,10 @@ class MapTicketsTableViewController: UITableViewController {
         self.tableView.reloadData()
       }
     }
+  }
+  
+  @IBAction func back(_ sender: Any) {
+    self.dismiss(animated: true, completion: nil)
   }
   
   @IBAction func newTicket(_ sender: Any) {
@@ -62,6 +66,10 @@ class MapTicketsTableViewController: UITableViewController {
     
     return cell
     
+  }
+  
+  func createTicketDidCancel(viewController: CreateTicketViewController) {
+    viewController.dismiss(animated: true, completion: nil)
   }
 
   
@@ -107,7 +115,9 @@ class MapTicketsTableViewController: UITableViewController {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "createTicketSegue" {
       let navigationController = segue.destination as! UINavigationController
-      (navigationController.topViewController as! CreateTicketViewController).map = self.map
+      let vc = navigationController.topViewController as! CreateTicketViewController
+      vc.delegate = self
+      vc.map = self.map
     }
   }
   

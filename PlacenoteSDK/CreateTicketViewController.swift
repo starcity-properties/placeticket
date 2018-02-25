@@ -10,12 +10,19 @@ import UIKit
 import ARKit
 import SceneKit
 
+protocol CreateTicketViewControllerDelegate {
+  func createTicketDidCancel(viewController: CreateTicketViewController)
+}
+
 class CreateTicketViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, PNDelegate {
   
   @IBOutlet weak var scnView: ARSCNView!
   @IBOutlet weak var statusLabel: UILabel!
   
   var map: Map?
+  
+  // Delegate
+  var delegate: CreateTicketViewControllerDelegate?
   
   // AR Scene
   private var scnScene: SCNScene!
@@ -58,7 +65,7 @@ class CreateTicketViewController: UIViewController, ARSCNViewDelegate, ARSession
           
           //          LibPlacenote.instance.stopSession() // NOTE: Doing this screws stuff up
           LibPlacenote.instance.startSession()
-//          self.tapRecognizer?.isEnabled = true
+          //          self.tapRecognizer?.isEnabled = true
         } else if (faulted) {
           print ("Couldnt load map: " + self.map!.id)
           self.statusLabel.text = "Load error Map Id: " +  self.map!.id
@@ -84,6 +91,7 @@ class CreateTicketViewController: UIViewController, ARSCNViewDelegate, ARSession
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     scnView.session.pause()
+    LibPlacenote.instance.stopSession()
   }
   
   //Function to setup the view and setup the AR Scene including options
@@ -194,6 +202,23 @@ class CreateTicketViewController: UIViewController, ARSCNViewDelegate, ARSession
     statusLabel.text = status
   }
   
+  @IBAction func cancel(_ sender: Any) {
+    LibPlacenote.instance.saveMap(savedCb: { [weak self] (mapId: String?) in
+      if (mapId != nil) {
+        LibPlacenote.instance.stopSession()
+        self?.delegate?.createTicketDidCancel(viewController: self!)
+      }
+    }) { (completed, faulted, percentage) in
+      if (completed) {
+        print ("Uploaded!")
+      } else if (faulted) {
+        print ("Couldnt upload map")
+      } else {
+        print ("Progress: " + percentage.description)
+      }
+    }
+    
+  }
   //  @IBAction func done(_ sender: Any) {
   //    //    self.dismiss(animated: true, completion: nil)
   //    LibPlacenote.instance.saveMap(savedCb: { (mapId: String?) in
