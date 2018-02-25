@@ -33,6 +33,7 @@ class MapTicketsTableViewController: UITableViewController {
   }
   
   @IBAction func newTicket(_ sender: Any) {
+    performSegue(withIdentifier: "createTicketSegue", sender: self)
   }
   
   override func didReceiveMemoryWarning() {
@@ -99,14 +100,16 @@ class MapTicketsTableViewController: UITableViewController {
    }
    */
   
-  /*
-   // MARK: - Navigation
-   
-   // In a storyboard-based application, you will often want to do a little preparation before navigation
-   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-   // Get the new view controller using segue.destinationViewController.
-   // Pass the selected object to the new view controller.
-   }
-   */
+  
+  // MARK: - Navigation
+  
+  // In a storyboard-based application, you will often want to do a little preparation before navigation
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "createTicketSegue" {
+      let navigationController = segue.destination as! UINavigationController
+      (navigationController.topViewController as! CreateTicketViewController).map = self.map
+    }
+  }
+  
   
 }
