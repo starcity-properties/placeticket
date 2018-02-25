@@ -83,9 +83,24 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
 //    let childUpdates  = ["/posts/\(key)": post,
 //                         "/user-posts/jalehman/\(key)": post]
 //    DatabaseManager.instance.ref.updateChildValues(childUpdates)
-    Map.fetch(id: "-L68iOanOJLZ4clwpqw4") { (map) in
+    
+    // TODO: find out how we get x, y and z from Placenote
+    
+//    let room1 = Map.create(id: "Room-1", placenoteId: "test-placenote", name: "Room-1")
+    
+    Map.fetch(id: "-L69TJ2Pxr0NBKzojqEf") { (map) in
       print ("The map name is: \(map.name)")
+      DatabaseManager.instance.ref.child("map-tickets/\(map.id)").observe(.childAdded, with: { (snapshot) in
+        print (snapshot)
+      })
+  //    Ticket.create(map: map, content: "a real ticket", x: 12.3, y: 2.1, z: 32.4)
     }
+    
+  
+
+
+//    Map.fetchByName(name: "Laundry Room")
+    
   }
 
   //Initialize view and scene

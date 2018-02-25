@@ -40,7 +40,13 @@ class Map {
       cb(Map(id: id, placenoteId: placenoteId, name: name))
     }
   }
-  
+    
+
+    static func fetchByName(name: String) {
+        let map = DatabaseManager.instance.ref?.child("maps").queryEqual(toValue: name)
+        print("map fetched by name is: ", map)
+    }
+    
   static func fetchAll(cb: @escaping ([Map]) -> ()) {
     
   }

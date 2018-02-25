@@ -684,7 +684,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 9V35X4Z333;
+				DEVELOPMENT_TEAM = Q595V6WXLX;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -699,8 +699,9 @@
 					"$(PROJECT_DIR)/PlacenoteSDK",
 					"$(PROJECT_DIR)/PlacenoteSDK/PNSDK",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.starcity.Spacenotes1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.starcity.Spacenotes2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_OBJC_BRIDGING_HEADER = "PlacenoteSDK/PlacenoteSDK-Bridging-Header.h";
@@ -716,7 +717,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 9V35X4Z333;
+				DEVELOPMENT_TEAM = Q595V6WXLX;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -732,7 +733,7 @@
 					"$(PROJECT_DIR)/PlacenoteSDK/PNSDK",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.starcity.Spacenotes1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.starcity.Spacenotes2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_OBJC_BRIDGING_HEADER = "PlacenoteSDK/PlacenoteSDK-Bridging-Header.h";
