@@ -44,15 +44,12 @@ class CreateTicketViewController: UIViewController, ARSCNViewDelegate, ARSession
     setupView()
     setupScene()
     
-    LibPlacenote.instance.multiDelegate += self;
+    LibPlacenote.instance.multiDelegate.addDelegate(delegate: self)
     
-    statusLabel.text = "Retrieving mapId: " + map!.id
-    if LibPlacenote.instance.initialized() {
-      LibPlacenote.instance.startSession()
-    }
-
+    statusLabel.text = "Retrieving mapId: " + map!.placenoteId
+    
     LibPlacenote.instance.loadMap(
-      mapId: map!.id,
+      mapId: map!.placenoteId,
       downloadProgressCb: {(completed: Bool, faulted: Bool, percentage: Float) -> Void in
         print (percentage)
         if (completed) {
@@ -60,12 +57,12 @@ class CreateTicketViewController: UIViewController, ARSCNViewDelegate, ARSession
           self.mappingComplete = false
           self.localizationStarted = true
           
-//          if (self.shapeManager.retrieveFromFile(filename: self.maps[indexPath.row])) {
-//            self.statusLabel.text = "Map Loaded. Look Around"
-//          }
-//          else {
-//            self.statusLabel.text = "Map Loaded. Shape file not found"
-//          }
+          //          if (self.shapeManager.retrieveFromFile(filename: self.maps[indexPath.row])) {
+          //            self.statusLabel.text = "Map Loaded. Look Around"
+          //          }
+          //          else {
+          //            self.statusLabel.text = "Map Loaded. Shape file not found"
+          //          }
           
           //          LibPlacenote.instance.stopSession() // NOTE: Doing this screws stuff up
           LibPlacenote.instance.startSession()
@@ -78,6 +75,7 @@ class CreateTicketViewController: UIViewController, ARSCNViewDelegate, ARSession
         }
     }
     )
+
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -94,7 +92,6 @@ class CreateTicketViewController: UIViewController, ARSCNViewDelegate, ARSession
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     scnView.session.pause()
-    LibPlacenote.instance.stopSession()
   }
   
   //Function to setup the view and setup the AR Scene including options
@@ -205,22 +202,12 @@ class CreateTicketViewController: UIViewController, ARSCNViewDelegate, ARSession
     statusLabel.text = status
   }
   
+
+  
   @IBAction func cancel(_ sender: Any) {
-    LibPlacenote.instance.saveMap(savedCb: { [weak self] (mapId: String?) in
-      if (mapId != nil) {
-        LibPlacenote.instance.stopSession()
-        self?.delegate?.createTicketDidCancel(viewController: self!)
-      }
-    }) { (completed, faulted, percentage) in
-      if (completed) {
-        print ("Uploaded!")
-      } else if (faulted) {
-        print ("Couldnt upload map")
-      } else {
-        print ("Progress: " + percentage.description)
-      }
-    }
-    
+    LibPlacenote.instance.stopSession()
+    LibPlacenote.instance.multiDelegate.removeDelegate(delegate: self)
+    self.delegate?.createTicketDidCancel(viewController: self)
   }
   //  @IBAction func done(_ sender: Any) {
   //    //    self.dismiss(animated: true, completion: nil)
