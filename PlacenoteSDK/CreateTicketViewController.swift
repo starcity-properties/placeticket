@@ -202,13 +202,16 @@ class CreateTicketViewController: UIViewController, ARSCNViewDelegate, ARSession
     statusLabel.text = status
   }
   
-
-  
   @IBAction func cancel(_ sender: Any) {
     LibPlacenote.instance.stopSession()
     LibPlacenote.instance.multiDelegate.removeDelegate(delegate: self)
     self.delegate?.createTicketDidCancel(viewController: self)
   }
+  
+  @IBAction func save(_ sender: Any) {
+    
+  }
+  
   //  @IBAction func done(_ sender: Any) {
   //    //    self.dismiss(animated: true, completion: nil)
   //    LibPlacenote.instance.saveMap(savedCb: { (mapId: String?) in
