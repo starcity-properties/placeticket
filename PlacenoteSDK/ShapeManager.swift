@@ -228,26 +228,28 @@ class ShapeManager {
     
     if shapeNodes.count < maxShapes {
       let geometryNode: SCNNode = createIcon(position: position, color: color)
-      
+      let geometryNode2: SCNNode = createCircle(position: position, color: color)
       //    let camera = self.scnView.pointOfView!
-      //    let position = SCNVector3(x: 0, y: 0, z: -1)
-      //    geometryNode.position = camera.convertPosition(position, to: nil)
-      //    geometryNode.rotation = camera.rotation
+//          let position = SCNVector3(x: 0, y: 0, z: -1)
+//          geometryNode.position = camera.convertPosition(position, to: nil)
+//          geometryNode.rotation = camera.rotation
       
       //    camera.addChildNode(geometryNode)
       
       //    let cameraNode = self.scnView.pointOfView
       //    print(cameraNode?.position)
-      //    geometryNode.eulerAngles.z = 1.5087
-      //    let action = SCNAction.rotateBy(x: CGFloat(2 * Double.pi), y: 0, z: 0, duration: 10)
-      //    let repAction = SCNAction.repeatForever(action)
-      //    geometryNode.runAction(repAction, forKey: "myrotate")
+          geometryNode2.eulerAngles.z = 1.5087
+          let action = SCNAction.rotateBy(x: CGFloat(2 * Double.pi), y: 0, z: 0, duration: 10)
+          let repAction = SCNAction.repeatForever(action)
+          geometryNode2.runAction(repAction, forKey: "myrotate")
       
       
       shapePositions.append(position)
       shapeNodes.append(geometryNode)
+      shapeNodes.append(geometryNode2)
       
       scnScene.rootNode.addChildNode(geometryNode)
+      scnScene.rootNode.addChildNode(geometryNode2)
       shapesDrawn = true
 
     }
@@ -267,6 +269,21 @@ class ShapeManager {
     exclNode.position = position
     exclNode.scale = SCNVector3(x: 0.1, y: 0.1, z: 0.1)
   
+    return exclNode
+  }
+  
+  func createCircle (position: SCNVector3, color: UIColor) -> SCNNode {
+    let exclShape = SCNTorus(ringRadius: 1.0, pipeRadius: 0.1)
+    
+    let exclGeometry:SCNGeometry = exclShape
+    exclGeometry.materials.first?.diffuse.contents = color
+    
+    let exclNode = SCNNode(geometry: exclGeometry)
+    exclNode.position = position
+    exclNode.position.y += 0.17
+    exclNode.position.x += 0.03
+    exclNode.scale = SCNVector3(x: 0.1, y: 0.1, z: 0.1)
+    
     return exclNode
   }
   
