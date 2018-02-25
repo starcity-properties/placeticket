@@ -129,7 +129,7 @@ class TicketDetailViewController: UIViewController, ARSCNViewDelegate, ARSession
     scnScene = SCNScene()
     scnView.scene = scnScene
     ptViz = FeaturePointVisualizer(inputScene: scnScene);
-    ptViz?.enableFeaturePoints()
+//    ptViz?.enableFeaturePoints()
     
     if let camera: SCNNode = scnView?.pointOfView {
       camManager = CameraManager(scene: scnScene, cam: camera)
@@ -220,8 +220,8 @@ class TicketDetailViewController: UIViewController, ARSCNViewDelegate, ARSession
         if (!mappingStarted) {
           print ("Mapping started")
           mappingStarted = true
-          LibPlacenote.instance.stopSession()
-          LibPlacenote.instance.startSession()
+//          LibPlacenote.instance.stopSession()
+//          LibPlacenote.instance.startSession()
         }
       }
       status = "Ready"

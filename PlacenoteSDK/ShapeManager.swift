@@ -80,7 +80,6 @@ class ShapeManager {
     self.maxShapes = max
   }
   
-  // TODO:
   func saveShapes() {
     if (shapePositions.count > 0) {
       for i in 0...(shapePositions.count-1) {
@@ -121,9 +120,12 @@ class ShapeManager {
   }
   
   func loadShapes(tickets: [Ticket]) {
+    clearShapes()
+    print ("~~~~~~~~~~~~~~~~~~~~~~~~Loading shapes...\(tickets)~~~~~~~~~~~~~~~~~~~~")
     for ticket in tickets {
       let position: SCNVector3 = SCNVector3(x: ticket.x, y: ticket.y, z: ticket.z)
       shapePositions.append(position)
+      print ("Position of \(ticket.id): \(position)")
       shapeNodes.append(createIcon(position: position, color: ticket.statusColor()))
     }
   }
@@ -185,6 +187,7 @@ class ShapeManager {
   }
   
   func drawView(parent: SCNNode) {
+    print ("~~~~~~~~~~~~~~~~~~~~~~~~~Drawing view...are shapes drawn?\(shapesDrawn)~~~~~~~~~~~~~~~")
     guard !shapesDrawn else {return}
     for shape in shapeNodes {
       parent.addChildNode(shape)
@@ -206,7 +209,7 @@ class ShapeManager {
 
   func placeIcon (position: SCNVector3, color: UIColor = blueColor()) {
     
-    if shapeNodes.count <= maxShapes {
+    if shapeNodes.count < maxShapes {
       let geometryNode: SCNNode = createIcon(position: position, color: color)
       
       //    let camera = self.scnView.pointOfView!
