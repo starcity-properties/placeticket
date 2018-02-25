@@ -211,10 +211,8 @@ class PlaceTicketLocationViewController: UIViewController, ARSCNViewDelegate, AR
         if (!mappingStarted) {
           print ("Mapping started")
           mappingStarted = true
-          LibPlacenote.instance.stopSession()
+//          LibPlacenote.instance.stopSession()
           loadMap(map: self.map!)
-          
-//          LibPlacenote.instance.startSession()
         }
       }
       status = "Ready"
@@ -236,6 +234,7 @@ class PlaceTicketLocationViewController: UIViewController, ARSCNViewDelegate, AR
   }
   
   @objc func handleTap(sender: UITapGestureRecognizer) {
+    print ("HANDLING TAP")
     if sender.state == .ended {
       let tapLocation = sender.location(in: scnView)
       let hitTestResults = scnView.hitTest(tapLocation, types: .featurePoint)

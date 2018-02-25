@@ -225,7 +225,7 @@ class ShapeManager {
   
 
   func placeIcon (position: SCNVector3, color: UIColor = blueColor()) {
-    
+    print ("Can place shape? \(shapeNodes.count < maxShapes)", position)
     if shapeNodes.count < maxShapes {
       let geometryNode: SCNNode = createIcon(position: position, color: color)
       
