@@ -26,6 +26,17 @@ class Ticket {
         self.mapId = mapId
     }
   
+  static func observe(map: Map, cb: @escaping (Ticket) -> ()) {
+    DatabaseManager.instance.ref.child("map-tickets/\(map.id)").observe(.childAdded) { (snapshot) in
+      let value = snapshot.value as? NSDictionary
+      let content = value!["content"] as? String ?? ""
+      let x = value!["x"] as? Float ?? 0
+      let y = value!["y"] as? Float ?? 0
+      let z = value!["z"] as? Float ?? 0
+      cb(Ticket(id: snapshot.key, content: content, x: x, y: y, z: z, mapId: map.id))
+    }
+  }
+  
     static func create(map: Map, content: String, x: Float, y: Float, z: Float) -> Ticket {
         let key = DatabaseManager.instance.ref.child("tickets").childByAutoId().key
         let ticket = Ticket(id: key, content: content, x: x, y: y, z: z, mapId: (map.id))

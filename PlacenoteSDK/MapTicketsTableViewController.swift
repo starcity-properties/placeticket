@@ -1,5 +1,5 @@
 //
-//  PlacesViewControllerTableViewController.swift
+//  MapTicketsTableViewController.swift
 //  PlacenoteSDK
 //
 //  Created by Josh Lehman on 2/24/18.
@@ -8,33 +8,31 @@
 
 import UIKit
 
-class PlacesViewControllerTableViewController: UITableViewController {
+class MapTicketsTableViewController: UITableViewController {
   
-  var maps: [Map] = []
+  var map: Map?
   
-  private var selectedMap: Map?
+  private var tickets: [Ticket] = []
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.tableView.delegate = self
+    self.navigationItem.title = (map!.name)
+    
     
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = false
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem
-    
-//    Map.fetch(id: "-L69TJ2Pxr0NBKzojqEf") { (map) in
-//      print ("The map name is: \(map.name)")
-//    }
-//
-    Map.observe { (map) in
+    Ticket.observe(map: self.map!) { (ticket: Ticket) in
       DispatchQueue.main.async {
-        self.maps.append(map)
+        self.tickets.append(ticket)
         self.tableView.reloadData()
       }
     }
-    
+  }
+  
+  @IBAction func newTicket(_ sender: Any) {
   }
   
   override func didReceiveMemoryWarning() {
@@ -51,23 +49,21 @@ class PlacesViewControllerTableViewController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     // #warning Incomplete implementation, return the number of rows
-    return self.maps.count
+    return self.tickets.count
   }
   
+
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "mapCell", for: indexPath)
-    let map = maps[indexPath.row]
-    cell.textLabel?.text = map.name
+    let cell = tableView.dequeueReusableCell(withIdentifier: "ticketCell", for: indexPath)
+    let ticket = tickets[indexPath.row]
+    cell.textLabel?.text = ticket.content
     // Configure the cell...
     
     return cell
+    
   }
+
   
-  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//    let cell = tableView.dequeueReusableCell(withIdentifier: "mapCell", for: indexPath)
-    selectedMap = self.maps[indexPath.row]
-    performSegue(withIdentifier: "showMapDetailSegue", sender: self)
-  }
   /*
    // Override to support conditional editing of the table view.
    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -103,18 +99,14 @@ class PlacesViewControllerTableViewController: UITableViewController {
    }
    */
   
-
-  // MARK: - Navigation
-  
-  // In a storyboard-based application, you will often want to do a little preparation before navigation
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
-    if segue.identifier == "showMapDetailSegue" {
-      let navigationController = segue.destination as! UINavigationController
-      (navigationController.topViewController as! MapTicketsTableViewController).map = selectedMap
-    }
-  }
-  
+  /*
+   // MARK: - Navigation
+   
+   // In a storyboard-based application, you will often want to do a little preparation before navigation
+   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+   // Get the new view controller using segue.destinationViewController.
+   // Pass the selected object to the new view controller.
+   }
+   */
   
 }
