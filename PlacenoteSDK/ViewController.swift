@@ -83,9 +83,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
 //    let childUpdates  = ["/posts/\(key)": post,
 //                         "/user-posts/jalehman/\(key)": post]
 //    DatabaseManager.instance.ref.updateChildValues(childUpdates)
-    Map.fetch(id: "-L68iOanOJLZ4clwpqw4") { (map) in
-      print ("The map name is: \(map.name)")
-    }
+    
   }
 
   //Initialize view and scene

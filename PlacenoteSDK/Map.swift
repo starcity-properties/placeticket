@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import FirebaseDatabase
 
 class Map {
 
@@ -22,7 +23,20 @@ class Map {
     self.tickets = tickets
   }
   
-  static func create(id: String, placenoteId: String, name: String) -> Map {
+  static func ref() -> DatabaseReference {
+    return DatabaseManager.instance.ref.child("maps")
+  }
+  
+  static func observe(cb: @escaping (Map) -> ()) {
+    Map.ref().observe(.childAdded) { (snapshot) in
+      let value = snapshot.value as? NSDictionary
+      let placenoteId = value!["placenoteId"] as? String ?? "unknown"
+      let name = value!["name"] as? String ?? "unknown"
+      cb(Map(id: snapshot.key, placenoteId: placenoteId, name: name))
+    }
+  }
+  
+  static func create(placenoteId: String, name: String) -> Map {
     let key = DatabaseManager.instance.ref.child("maps").childByAutoId().key
     let map = Map(id: key, placenoteId: placenoteId, name: name)
     let updates = ["/maps/\(key)": map.createData()]
@@ -36,7 +50,7 @@ class Map {
       value = value![id] as? NSDictionary
       let placenoteId = value!["placenoteId"] as? String ?? "unknown"
       let name = value!["name"] as? String ?? "unknown"
-      // TODO: create tickets
+      print ("The value is:\(value)")
       cb(Map(id: id, placenoteId: placenoteId, name: name))
     }
   }
