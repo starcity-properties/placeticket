@@ -35,14 +35,23 @@ extension Data {
   }
 }
 
-func generateRandomColor() -> UIColor {
-  let hue : CGFloat = CGFloat(arc4random() % 256) / 256 // use 256 to get full range from 0.0 to 1.0
-  let saturation : CGFloat = CGFloat(arc4random() % 128) / 256 + 0.3 // from 0.3 to 1.0 to stay away from white
-  let brightness : CGFloat = CGFloat(arc4random() % 128) / 256 + 0.3 // from 0.3 to 1.0 to stay away from black
+func blueColor() -> UIColor {
+//  let hue : CGFloat = CGFloat(arc4random() % 256) / 256 // use 256 to get full range from 0.0 to 1.0
+//  let saturation : CGFloat = CGFloat(arc4random() % 128) / 256 + 0.3 // from 0.3 to 1.0 to stay away from white
+//  let brightness : CGFloat = CGFloat(arc4random() % 128) / 256 + 0.3 // from 0.3 to 1.0 to stay away from black
   
 //  return UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: 1)
     return UIColor.blue
 }
+
+func yellowColor() -> UIColor {
+    return UIColor.yellow
+}
+
+func redColor() -> UIColor {
+    return UIColor.red
+}
+
 
 
 //Class to manage a list of shapes to be view in Augmented Reality including spawning, managing a list and saving/retrieving from persistent memory using JSON
@@ -113,13 +122,14 @@ class ShapeManager {
       guard let shapeArray = try JSONSerialization.jsonObject(with: data, options: []) as? [[String: [String: String]]] else { return false }
       for item in shapeArray {
         
+        let status = "???"   //////////////////////////////////////////////////////////////////////////// THIS IS WHY IT'S BLUE
         let x_string: String = item["shape"]!["x"]!
         let y_string: String = item["shape"]!["y"]!
         let z_string: String = item["shape"]!["z"]!
         let position: SCNVector3 = SCNVector3(x: Float(x_string)!, y: Float(y_string)!, z: Float(z_string)!)
         let type: ShapeType = ShapeType(rawValue: Int(item["shape"]!["style"]!)!)!
         shapePositions.append(position)
-        shapeNodes.append(createIcon(position: position))
+        shapeNodes.append(createIcon(position: position, status: status))
         
         print ("Shape Manager: Retrieved " + String(describing: type) + " type at position" + String (describing: position))
       }
@@ -174,14 +184,22 @@ class ShapeManager {
 
   func placeIcon (position: SCNVector3) {
     
-    let geometryNode: SCNNode = createIcon(position: position)
+    let geometryNode: SCNNode = createIcon(position: position, status: "CHANGE ME")
     
-    let camera = self.scnView.pointOfView!
-    let position = SCNVector3(x: 0, y: 0, z: -1)
-    geometryNode.position = camera.convertPosition(position, to: nil)
-    geometryNode.rotation = camera.rotation
+//    let camera = self.scnView.pointOfView!
+//    let position = SCNVector3(x: 0, y: 0, z: -1)
+//    geometryNode.position = camera.convertPosition(position, to: nil)
+//    geometryNode.rotation = camera.rotation
     
-    camera.addChildNode(geometryNode)
+//    camera.addChildNode(geometryNode)
+    
+//    let cameraNode = self.scnView.pointOfView
+//    print(cameraNode?.position)
+//    geometryNode.eulerAngles.z = 1.5087
+//    let action = SCNAction.rotateBy(x: CGFloat(2 * Double.pi), y: 0, z: 0, duration: 10)
+//    let repAction = SCNAction.repeatForever(action)
+//    geometryNode.runAction(repAction, forKey: "myrotate")
+
     
     shapePositions.append(position)
     shapeNodes.append(geometryNode)
@@ -191,12 +209,21 @@ class ShapeManager {
   }
 
   
-  func createIcon (position: SCNVector3) -> SCNNode {
+  func createIcon (position: SCNVector3, status: String) -> SCNNode {
     let exclShape = SCNText(string: "!", extrusionDepth: 0.2)
+//    let exclShape2 = SCNTorus(ringRadius: 1.0, pipeRadius: 0.1)
     exclShape.font = UIFont(name: "Helvetica", size: 2)
     
+    var color = blueColor()
+    
+    if status == "Pending" {
+      color = redColor()
+    } else if status == "Assigned" {
+      color = yellowColor()
+    }
+    
     let exclGeometry:SCNGeometry = exclShape
-    exclGeometry.materials.first?.diffuse.contents = UIColor.blue
+    exclGeometry.materials.first?.diffuse.contents = color
     
     let exclNode = SCNNode(geometry: exclGeometry)
     exclNode.position = position
