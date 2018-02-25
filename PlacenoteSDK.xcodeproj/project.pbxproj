@@ -25,6 +25,7 @@
 		6A2702142042616C00F260B2 /* PlaceTicketLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2702132042616C00F260B2 /* PlaceTicketLocationViewController.swift */; };
 		6A9777CD2042B7170097D163 /* TicketDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9777CC2042B7170097D163 /* TicketDetailViewController.swift */; };
 		6A9777CF204331990097D163 /* CreateTicketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9777CE204331990097D163 /* CreateTicketViewController.swift */; };
+		6AA8DF7920433E500067461C /* ShowExistingTicketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA8DF7820433E500067461C /* ShowExistingTicketViewController.swift */; };
 		A2BB047C200FE340005A9E5F /* Placenote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BB047B200FE340005A9E5F /* Placenote.framework */; };
 		A2BB047D200FE3A5005A9E5F /* Placenote.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = A2BB047B200FE340005A9E5F /* Placenote.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AF4A60311FEA379E00CE91D9 /* ShapeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4A60301FEA379E00CE91D9 /* ShapeManager.swift */; };
@@ -88,6 +89,7 @@
 		6A2702132042616C00F260B2 /* PlaceTicketLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceTicketLocationViewController.swift; sourceTree = "<group>"; };
 		6A9777CC2042B7170097D163 /* TicketDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketDetailViewController.swift; sourceTree = "<group>"; };
 		6A9777CE204331990097D163 /* CreateTicketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTicketViewController.swift; sourceTree = "<group>"; };
+		6AA8DF7820433E500067461C /* ShowExistingTicketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowExistingTicketViewController.swift; sourceTree = "<group>"; };
 		6E1B12A939FA97CF71B86304 /* Pods_PlacenoteSDKUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlacenoteSDKUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8041472B962C64D730D7AA86 /* Pods-PlacenoteSDKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlacenoteSDKTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PlacenoteSDKTests/Pods-PlacenoteSDKTests.debug.xcconfig"; sourceTree = "<group>"; };
 		824BB58D59A697F7B9AE9BAB /* Pods_PlacenoteSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PlacenoteSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -184,6 +186,7 @@
 				6A9777CE204331990097D163 /* CreateTicketViewController.swift */,
 				6A2702132042616C00F260B2 /* PlaceTicketLocationViewController.swift */,
 				6A9777CC2042B7170097D163 /* TicketDetailViewController.swift */,
+				6AA8DF7820433E500067461C /* ShowExistingTicketViewController.swift */,
 				AFEE51191FF56370004AEFEE /* ViewController.swift */,
 				6A27020920420C5200F260B2 /* Map.swift */,
 				AF4A60301FEA379E00CE91D9 /* ShapeManager.swift */,
@@ -527,6 +530,7 @@
 			files = (
 				6A27020820420C2D00F260B2 /* Ticket.swift in Sources */,
 				2A08D58B20053FDA00D7F0CE /* FeaturePointVisualizer.swift in Sources */,
+				6AA8DF7920433E500067461C /* ShowExistingTicketViewController.swift in Sources */,
 				2A08D58D20054BC900D7F0CE /* CameraManager.swift in Sources */,
 				6A27020620420B1900F260B2 /* DatabaseManager.swift in Sources */,
 				6A2702142042616C00F260B2 /* PlaceTicketLocationViewController.swift in Sources */,
@@ -712,7 +716,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 2U4RXC224Z;
+				DEVELOPMENT_TEAM = Q595V6WXLX;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -729,7 +733,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.starcity.Spacenotes4;
+				PRODUCT_BUNDLE_IDENTIFIER = com.starcity.Spacenotes2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_OBJC_BRIDGING_HEADER = "PlacenoteSDK/PlacenoteSDK-Bridging-Header.h";
@@ -745,7 +749,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 2U4RXC224Z;
+				DEVELOPMENT_TEAM = Q595V6WXLX;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -761,7 +765,7 @@
 					"$(PROJECT_DIR)/PlacenoteSDK/PNSDK",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.starcity.Spacenotes4;
+				PRODUCT_BUNDLE_IDENTIFIER = com.starcity.Spacenotes2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_OBJC_BRIDGING_HEADER = "PlacenoteSDK/PlacenoteSDK-Bridging-Header.h";

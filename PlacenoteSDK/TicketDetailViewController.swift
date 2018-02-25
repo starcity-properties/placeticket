@@ -15,13 +15,14 @@ protocol TicketDetailViewControllerDelegate {
   func ticketDetailTickets(viewController: TicketDetailViewController) -> [Ticket]
 }
 
-class TicketDetailViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, PNDelegate {
-
+class TicketDetailViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, PNDelegate, ShowExistingTicketViewControllerDelegate {
+  
   @IBOutlet weak var scnView: ARSCNView!
   @IBOutlet weak var statusLabel: UILabel!
   
   var map: Map?
-//  var tickets: [Ticket] = []
+  var selectedTicket: Ticket?
+  //  var tickets: [Ticket] = []
   
   // Delegate
   var delegate: TicketDetailViewControllerDelegate?
@@ -35,12 +36,12 @@ class TicketDetailViewController: UIViewController, ARSCNViewDelegate, ARSession
   private var mappingStarted: Bool = false;
   private var mappingComplete: Bool = false;
   private var localizationStarted: Bool = false;
-
+  
   
   private var shapeManager: ShapeManager!
   private var tapRecognizer: UITapGestureRecognizer? //initialized after view is loaded
   private var tapRec: UITapGestureRecognizer? //initialized after view is loaded
-
+  
   
   // PlacenoteSDK features & helpers
   private var camManager: CameraManager? = nil;
@@ -127,7 +128,7 @@ class TicketDetailViewController: UIViewController, ARSCNViewDelegate, ARSession
     scnView.debugOptions = []
     
     //    scnView.debugOptions = ARSCNDebugOptions.showFeaturePoints
-//    scnView.debugOptions = ARSCNDebugOptions.showWorldOrigin
+    //    scnView.debugOptions = ARSCNDebugOptions.showWorldOrigin
   }
   
   //Function to setup AR Scene
@@ -135,7 +136,7 @@ class TicketDetailViewController: UIViewController, ARSCNViewDelegate, ARSession
     scnScene = SCNScene()
     scnView.scene = scnScene
     ptViz = FeaturePointVisualizer(inputScene: scnScene);
-//    ptViz?.enableFeaturePoints()
+    //    ptViz?.enableFeaturePoints()
     
     if let camera: SCNNode = scnView?.pointOfView {
       camManager = CameraManager(scene: scnScene, cam: camera)
@@ -152,6 +153,12 @@ class TicketDetailViewController: UIViewController, ARSCNViewDelegate, ARSession
     // Dispose of any resources that can be recreated.
   }
   
+  // MARK: - ShowExistingViewControllerTicketWhatverDlglags
+  
+  func showExistingTicketDidCancel(viewController: ShowExistingTicketViewController) {
+    viewController.dismiss(animated: true, completion: nil)
+    loadMap(map: self.map!, tickets: self.delegate!.ticketDetailTickets(viewController: self))
+  }
   
   // MARK: - PNDelegate functions
   
@@ -226,8 +233,9 @@ class TicketDetailViewController: UIViewController, ARSCNViewDelegate, ARSession
         if (!mappingStarted) {
           print ("Mapping started")
           mappingStarted = true
-//          LibPlacenote.instance.stopSession()
-//          LibPlacenote.instance.startSession()
+          loadMap(map: self.map!, tickets: self.delegate!.ticketDetailTickets(viewController: self))
+          //          LibPlacenote.instance.stopSession()
+          //          LibPlacenote.instance.startSession()
         }
       }
       status = "Ready"
@@ -243,44 +251,50 @@ class TicketDetailViewController: UIViewController, ARSCNViewDelegate, ARSession
     self.delegate?.ticketDetailDone(viewController: self)
   }
   
-    @objc func handleTap(sender: UITapGestureRecognizer) {
-        
-        // let tapLocation = sender.location(in: scnView)
-        // let hitTestResults = scnView.hitTest(tapLocation, types: .featurePoint)
-        
-        
-        // if let result = hitTestResults.first {
-        //   let pose = LibPlacenote.instance.processPose(pose: result.worldTransform)
-        //   shapeManager.placeIcon(position: pose.position())
-        
-        //   for shapeNode in shapeManager.shapeNodes {
-        //     if (detectCollision(first: shapeNode.position, second: pose.position())) {
-        //       print ("PRINT ---------------------------------------------- collision!")
-        //     }
-        //   }
-        
-        if sender.state == .ended {
-            let location = sender.location(in: actualScnView)
-            let hits = actualScnView.hitTest(location, options: nil)
-            
-            if !hits.isEmpty && hits.first?.node.geometry?.materials != nil {
-                let tappedNode = hits.first?.node
-                print("============== I'M TAPPED ===================")
-            }
-        }
-    }
+  @objc func handleTap(sender: UITapGestureRecognizer) {
     
-//  @objc func handleTap(sender: UITapGestureRecognizer) {
-//    if sender.state == .ended {
-//      let tapLocation = sender.location(in: scnView)
-//      let hitTestResults = scnView.hitTest(tapLocation, types: .featurePoint)
-//
-//      if let result = hitTestResults.first {
-//        let pose = LibPlacenote.instance.processPose(pose: result.worldTransform)
-//        shapeManager.placeIcon(position: pose.position())
-//      }
-//    }
-//  }
+    // let tapLocation = sender.location(in: scnView)
+    // let hitTestResults = scnView.hitTest(tapLocation, types: .featurePoint)
+    
+    
+    // if let result = hitTestResults.first {
+    //   let pose = LibPlacenote.instance.processPose(pose: result.worldTransform)
+    //   shapeManager.placeIcon(position: pose.position())
+    
+    //   for shapeNode in shapeManager.shapeNodes {
+    //     if (detectCollision(first: shapeNode.position, second: pose.position())) {
+    //       print ("PRINT ---------------------------------------------- collision!")
+    //     }
+    //   }
+    
+    if sender.state == .ended {
+      let location = sender.location(in: actualScnView)
+      let hits = actualScnView.hitTest(location, options: nil)
+      
+      if !hits.isEmpty && hits.first?.node.geometry?.materials != nil {
+        if let tappedNode = hits.first?.node {
+          if let ticket = shapeManager.getTicket(position: tappedNode.position) {
+            selectedTicket = ticket
+            performSegue(withIdentifier: "showExistingTicket", sender: self)
+          } else {
+            print ("Ticket not found.")
+          }
+        }
+      }
+    }
+  }
+  
+  //  @objc func handleTap(sender: UITapGestureRecognizer) {
+  //    if sender.state == .ended {
+  //      let tapLocation = sender.location(in: scnView)
+  //      let hitTestResults = scnView.hitTest(tapLocation, types: .featurePoint)
+  //
+  //      if let result = hitTestResults.first {
+  //        let pose = LibPlacenote.instance.processPose(pose: result.worldTransform)
+  //        shapeManager.placeIcon(position: pose.position())
+  //      }
+  //    }
+  //  }
   
   //  @IBAction func done(_ sender: Any) {
   //    //    self.dismiss(animated: true, completion: nil)
@@ -303,14 +317,21 @@ class TicketDetailViewController: UIViewController, ARSCNViewDelegate, ARSession
   //
   //  }
   
-  /*
-   // MARK: - Navigation
-   
-   // In a storyboard-based application, you will often want to do a little preparation before navigation
-   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-   // Get the new view controller using segue.destinationViewController.
-   // Pass the selected object to the new view controller.
-   }
-   */
-
+  
+  // MARK: - Navigation
+  
+  // In a storyboard-based application, you will often want to do a little preparation before navigation
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
+    if segue.identifier == "showExistingTicket" {
+      let navigationController = segue.destination as! UINavigationController
+      let vc = navigationController.topViewController as! ShowExistingTicketViewController
+      vc.delegate = self
+      vc.ticket = self.selectedTicket
+      //      vc.map = self.map
+    }
+  }
+  
+  
 }

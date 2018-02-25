@@ -64,6 +64,8 @@ class ShapeManager {
   
   private var shapePositions: [SCNVector3] = []
   private var maxShapes: Int = 1
+  private var ticketLookup: [String: SCNVector3] = [:]
+  private var tickets: [Ticket] = []
   private var shapeTypes: [ShapeType] = []
   var shapeNodes: [SCNNode] = []
   
@@ -86,7 +88,6 @@ class ShapeManager {
         Ticket.create(map: self.map, content: content, x: shapePositions[i].x, y: shapePositions[i].y, z: shapePositions[i].z)
       }
     }
-    
   }
   
   //Save JSON File of Shapes with MapID as its name
@@ -119,15 +120,30 @@ class ShapeManager {
     
   }
   
+  func getTicket(position: SCNVector3) -> Ticket? {
+    for (k, v) in ticketLookup {
+      if (v.x == position.x && v.y == position.y && v.z == position.z) {
+        for t in self.tickets {
+          if t.id == k {
+            return t
+          }
+        }
+      }
+    }
+    return nil
+  }
+  
   func loadShapes(tickets: [Ticket]) {
     clearShapes()
     print ("~~~~~~~~~~~~~~~~~~~~~~~~Loading shapes...\(tickets)~~~~~~~~~~~~~~~~~~~~")
     for ticket in tickets {
       let position: SCNVector3 = SCNVector3(x: ticket.x, y: ticket.y, z: ticket.z)
       shapePositions.append(position)
+      ticketLookup[ticket.id] = position
       print ("Position of \(ticket.id): \(position)")
       shapeNodes.append(createIcon(position: position, color: ticket.statusColor()))
     }
+    self.tickets = tickets
   }
   
   //Retrieve JSON file with a certain mapid name
@@ -201,6 +217,7 @@ class ShapeManager {
       node.geometry!.firstMaterial!.normal.contents = nil
       node.geometry!.firstMaterial!.diffuse.contents = nil
     }
+    ticketLookup = [:]
     shapeNodes.removeAll()
     shapePositions.removeAll()
     shapeTypes.removeAll()
