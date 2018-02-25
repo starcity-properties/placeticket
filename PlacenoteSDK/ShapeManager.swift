@@ -41,7 +41,8 @@ func generateRandomColor() -> UIColor {
   let saturation : CGFloat = CGFloat(arc4random() % 128) / 256 + 0.3 // from 0.3 to 1.0 to stay away from white
   let brightness : CGFloat = CGFloat(arc4random() % 128) / 256 + 0.3 // from 0.3 to 1.0 to stay away from black
   
-  return UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: 1)
+//  return UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: 1)
+    return UIColor.blue
 }
 
 
@@ -53,7 +54,7 @@ class ShapeManager {
   
   private var shapePositions: [SCNVector3] = []
   private var shapeTypes: [ShapeType] = []
-  private var shapeNodes: [SCNNode] = []
+  var shapeNodes: [SCNNode] = []
   
   public var shapesDrawn: Bool! = false
   
@@ -119,8 +120,7 @@ class ShapeManager {
         let position: SCNVector3 = SCNVector3(x: Float(x_string)!, y: Float(y_string)!, z: Float(z_string)!)
         let type: ShapeType = ShapeType(rawValue: Int(item["shape"]!["style"]!)!)!
         shapePositions.append(position)
-        shapeTypes.append(type)
-        shapeNodes.append(createShape(position: position, type: type))
+        shapeNodes.append(createIcon(position: position))
         
         print ("Shape Manager: Retrieved " + String(describing: type) + " type at position" + String (describing: position))
       }
@@ -172,36 +172,38 @@ class ShapeManager {
   
   
   
-  func spawnRandomShape(position: SCNVector3) {
+
+  func placeIcon (position: SCNVector3) {
     
-    let shapeType: ShapeType = ShapeType.random()
-    placeShape(position: position, type: shapeType)
-  }
-  
-  func placeShape (position: SCNVector3, type: ShapeType) {
+    let geometryNode: SCNNode = createIcon(position: position)
     
-    let geometryNode: SCNNode = createShape(position: position, type: type)
+    let camera = self.scnView.pointOfView!
+    let position = SCNVector3(x: 0, y: 0, z: -1)
+    geometryNode.position = camera.convertPosition(position, to: nil)
+    geometryNode.rotation = camera.rotation
+    
+    camera.addChildNode(geometryNode)
     
     shapePositions.append(position)
-    shapeTypes.append(type)
     shapeNodes.append(geometryNode)
     
     scnScene.rootNode.addChildNode(geometryNode)
     shapesDrawn = true
   }
+
   
-  func createShape (position: SCNVector3, type: ShapeType) -> SCNNode {
+  func createIcon (position: SCNVector3) -> SCNNode {
+    let exclShape = SCNText(string: "!", extrusionDepth: 0.2)
+    exclShape.font = UIFont(name: "Helvetica", size: 2)
     
-    let geometry:SCNGeometry = ShapeType.generateGeometry(s_type: type)
-    let color = generateRandomColor()
-    geometry.materials.first?.diffuse.contents = color
+    let exclGeometry:SCNGeometry = exclShape
+    exclGeometry.materials.first?.diffuse.contents = UIColor.blue
     
-    let geometryNode = SCNNode(geometry: geometry)
-    geometryNode.position = position
-    geometryNode.scale = SCNVector3(x:0.1, y:0.1, z:0.1)
-    
-    return geometryNode
+    let exclNode = SCNNode(geometry: exclGeometry)
+    exclNode.position = position
+    exclNode.scale = SCNVector3(x: 0.1, y: 0.1, z: 0.1)
+  
+    return exclNode
   }
-  
   
 }

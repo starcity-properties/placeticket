@@ -17,6 +17,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
 
   //UI Elements
   @IBOutlet var scnView: ARSCNView!
+  @IBOutlet var actualScnView: SCNView!
 
   @IBOutlet var mapTable: UITableView!
   @IBOutlet var newMapButton: UIButton!
@@ -366,13 +367,29 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
   func updateMapTable() {
     LibPlacenote.instance.fetchMapList(listCb: onMapList)
   }
+  
+  func isWithinRange(x: Float, y: Float) -> Bool {
+    return ((x - 1)...(x + 1) ~= y)
+  }
+  func detectCollision(first: SCNVector3, second: SCNVector3) -> Bool {
+    return (isWithinRange(x: first.x, y: second.x) && isWithinRange(x: first.y, y: second.y) && isWithinRange(x: first.z, y: second.z))
+  }
 
   @objc func handleTap(sender: UITapGestureRecognizer) {
+    
     let tapLocation = sender.location(in: scnView)
     let hitTestResults = scnView.hitTest(tapLocation, types: .featurePoint)
+    
+    
     if let result = hitTestResults.first {
       let pose = LibPlacenote.instance.processPose(pose: result.worldTransform)
-      shapeManager.spawnRandomShape(position: pose.position())
+      shapeManager.placeIcon(position: pose.position())
+      
+      for shapeNode in shapeManager.shapeNodes {
+        if (detectCollision(first: shapeNode.position, second: pose.position())) {
+          print ("PRINT ---------------------------------------------- collision!")
+        }
+      }
 
     }
   }
