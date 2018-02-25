@@ -141,7 +141,17 @@ class ShapeManager {
       shapePositions.append(position)
       ticketLookup[ticket.id] = position
       print ("Position of \(ticket.id): \(position)")
+      
+      let geometryNode2 = createCircle(position: position, color: ticket.statusColor())
+      
+      geometryNode2.eulerAngles.z = 1.5087
+      let action = SCNAction.rotateBy(x: CGFloat(2 * Double.pi), y: 0, z: 0, duration: 10)
+      let repAction = SCNAction.repeatForever(action)
+      geometryNode2.runAction(repAction, forKey: "myrotate")
+      
       shapeNodes.append(createIcon(position: position, color: ticket.statusColor()))
+      shapeNodes.append(geometryNode2)
+
     }
     self.tickets = tickets
   }
