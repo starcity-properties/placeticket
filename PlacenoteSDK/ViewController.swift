@@ -38,7 +38,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
   //Application related variables
   private var shapeManager: ShapeManager!
   private var tapRecognizer: UITapGestureRecognizer? = nil //initialized after view is loaded
-
+  private var tapRec: UITapGestureRecognizer? = nil
+  private var obj_exists: Bool = false
 
   //Variables to manage PlacenoteSDK features and helpers
   private var maps: [String] = ["Sample Map"]
@@ -58,7 +59,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     tapRecognizer!.numberOfTapsRequired = 1
     tapRecognizer!.isEnabled = false
     scnView.addGestureRecognizer(tapRecognizer!)
-
+    tapRec = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
+    actualScnView.addGestureRecognizer(tapRec!)
     //IMPORTANT: need to run this line to subscribe to pose and status events
     //Declare yourself to be one of the delegates of PNDelegate to receive pose and status updates
     LibPlacenote.instance.multiDelegate += self;
@@ -126,6 +128,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
   //Function to setup the view and setup the AR Scene including options
   func setupView() {
     scnView = self.view as! ARSCNView
+    actualScnView = self.view as! SCNView
     scnView.showsStatistics = true
     scnView.autoenablesDefaultLighting = true
     scnView.delegate = self
@@ -317,7 +320,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
           self.mapTable.isHidden = true
           self.pickMapButton.setTitle("Load Map", for: .normal)
           self.newMapButton.isEnabled = true
-          
+
           if (self.shapeManager.retrieveFromFile(filename: self.maps[indexPath.row])) {
             self.statusLabel.text = "Map Loaded. Look Around"
           }
@@ -367,7 +370,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
   func updateMapTable() {
     LibPlacenote.instance.fetchMapList(listCb: onMapList)
   }
-  
+
   func isWithinRange(x: Float, y: Float) -> Bool {
     return ((x - 1)...(x + 1) ~= y)
   }
@@ -376,21 +379,41 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
   }
 
   @objc func handleTap(sender: UITapGestureRecognizer) {
-    
-    let tapLocation = sender.location(in: scnView)
-    let hitTestResults = scnView.hitTest(tapLocation, types: .featurePoint)
-    
-    
-    if let result = hitTestResults.first {
-      let pose = LibPlacenote.instance.processPose(pose: result.worldTransform)
-      shapeManager.placeIcon(position: pose.position())
-      
-      for shapeNode in shapeManager.shapeNodes {
-        if (detectCollision(first: shapeNode.position, second: pose.position())) {
-          print ("PRINT ---------------------------------------------- collision!")
+
+    // let tapLocation = sender.location(in: scnView)
+    // let hitTestResults = scnView.hitTest(tapLocation, types: .featurePoint)
+
+
+    // if let result = hitTestResults.first {
+    //   let pose = LibPlacenote.instance.processPose(pose: result.worldTransform)
+    //   shapeManager.placeIcon(position: pose.position())
+
+    //   for shapeNode in shapeManager.shapeNodes {
+    //     if (detectCollision(first: shapeNode.position, second: pose.position())) {
+    //       print ("PRINT ---------------------------------------------- collision!")
+    //     }
+    //   }
+
+    if sender.state == .ended {
+      if obj_exists == false {
+        let tapLocation = sender.location(in: scnView)
+        let hitTestResults = scnView.hitTest(tapLocation, types: .featurePoint)
+
+        if let result = hitTestResults.first {
+          let pose = LibPlacenote.instance.processPose(pose: result.worldTransform)
+          shapeManager.placeIcon(position: pose.position())
+          obj_exists = true
         }
       }
+      else {
+        let location = sender.location(in: actualScnView)
+        let hits = actualScnView.hitTest(location, options: nil)
 
+        if !hits.isEmpty && hits.first?.node.geometry?.materials != nil {
+          let tappedNode = hits.first?.node
+          print("============== I'M TAPPED ===================")
+        }
+      }
     }
   }
 
@@ -412,7 +435,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     let pose: matrix_float4x4 = didUpdate.camera.transform
 
     if (!LibPlacenote.instance.initialized()) {
-      print("SDK is not initialized")
+//      print("SDK is not initialized")
       return
     }
 
@@ -433,7 +456,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
     case ARCamera.TrackingState.normal:
       if (!trackingStarted) {
         trackingStarted = true
-        print("ARKit Enabled, Start Mapping")
+//        print("ARKit Enabled, Start Mapping")
         newMapButton.isEnabled = true
         newMapButton.setTitle("New Map", for: .normal)
       }
@@ -443,6 +466,3 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate, UI
   }
 
 }
-
-
-
