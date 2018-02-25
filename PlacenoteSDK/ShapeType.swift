@@ -38,7 +38,7 @@ public enum ShapeType:Int {
     case ShapeType.Cone:
       geometry = SCNCone(topRadius:0, bottomRadius:0.5, height:1.0)
     case ShapeType.Cylinder:
-      geometry = SCNCylinder(radius:0.5, height:1.0)
+      geometry = SCNCylinder(radius:0.2, height:1.0)
     case ShapeType.Pyramid:
       geometry = SCNPyramid(width:1.0, height:1.0, length:1.0)
     case ShapeType.Torus:
@@ -49,7 +49,16 @@ public enum ShapeType:Int {
       geometry = SCNBox(width: 1.0, height: 1.0, length: 1.0, chamferRadius: 0.1)
     }
     
-    return geometry
+//    return geometry
+    
+    let torus = SCNTorus(ringRadius: 1.0, pipeRadius: 0.1)
+    
+    return torus
+
+//    let exclamationPoint = SCNText(string: "!", extrusionDepth: 0.2)
+//    exclamationPoint.font = UIFont(name: "Helvetica", size: 2)
+    
+//    return exclamationPoint
   }
 }
 

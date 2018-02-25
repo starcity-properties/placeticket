@@ -61,7 +61,7 @@
 		2AFFA65F200563DB000239D3 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		2AFFA66320068963000239D3 /* MulticastDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
 		A2BB047B200FE340005A9E5F /* Placenote.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Placenote.framework; sourceTree = "<group>"; };
-		AF4A60301FEA379E00CE91D9 /* ShapeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeManager.swift; sourceTree = "<group>"; };
+		AF4A60301FEA379E00CE91D9 /* ShapeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ShapeManager.swift; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
 		AF5C90982008200A005F3090 /* Data.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = Data.bin; sourceTree = "<group>"; };
 		AF7A14A01F5A00AE00E0507A /* PlacenoteSDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlacenoteSDK.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF7A14A31F5A00AE00E0507A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -469,7 +469,7 @@
 				ARCHS = arm64;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 76PMXP42RV;
+				DEVELOPMENT_TEAM = 45Y353666Z;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -485,7 +485,7 @@
 					"$(PROJECT_DIR)/PlacenoteSDK/PNSDK",
 				);
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = vertical.PlacenoteSDK;
+				PRODUCT_BUNDLE_IDENTIFIER = vertical.ajp.PlacenoteSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_OBJC_BRIDGING_HEADER = "PlacenoteSDK/PlacenoteSDK-Bridging-Header.h";
@@ -501,7 +501,7 @@
 				ARCHS = arm64;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 76PMXP42RV;
+				DEVELOPMENT_TEAM = 45Y353666Z;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -517,7 +517,7 @@
 					"$(PROJECT_DIR)/PlacenoteSDK/PNSDK",
 				);
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = vertical.PlacenoteSDK;
+				PRODUCT_BUNDLE_IDENTIFIER = vertical.ajp.PlacenoteSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_OBJC_BRIDGING_HEADER = "PlacenoteSDK/PlacenoteSDK-Bridging-Header.h";
