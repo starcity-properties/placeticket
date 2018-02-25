@@ -218,6 +218,7 @@ class ShapeManager {
       node.geometry!.firstMaterial!.diffuse.contents = nil
     }
     ticketLookup = [:]
+    tickets = []
     shapeNodes.removeAll()
     shapePositions.removeAll()
     shapeTypes.removeAll()

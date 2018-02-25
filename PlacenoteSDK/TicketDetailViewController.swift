@@ -75,7 +75,9 @@ class TicketDetailViewController: UIViewController, ARSCNViewDelegate, ARSession
   }
   
   func loadMap(map: Map, tickets: [Ticket]) {
-    LibPlacenote.instance.stopSession()
+    if LibPlacenote.instance.getMappingStatus() == .running {
+      LibPlacenote.instance.stopSession()
+    }
     print ("LOADING MAP", tickets, map)
     LibPlacenote.instance.loadMap(
       mapId: map.placenoteId,
@@ -87,7 +89,6 @@ class TicketDetailViewController: UIViewController, ARSCNViewDelegate, ARSession
           self.localizationStarted = true
           self.statusLabel.text = "Map Loaded. Look Around"
           self.shapeManager.loadShapes(tickets: tickets)
-          print ("LOADING TICKETS:::::::::::::::::::::::::::: \(tickets)")
           LibPlacenote.instance.startSession()
           self.tapRecognizer?.isEnabled = true
         } else if (faulted) {
@@ -136,7 +137,7 @@ class TicketDetailViewController: UIViewController, ARSCNViewDelegate, ARSession
     scnScene = SCNScene()
     scnView.scene = scnScene
     ptViz = FeaturePointVisualizer(inputScene: scnScene);
-    //    ptViz?.enableFeaturePoints()
+    ptViz?.enableFeaturePoints()
     
     if let camera: SCNNode = scnView?.pointOfView {
       camManager = CameraManager(scene: scnScene, cam: camera)
@@ -234,8 +235,6 @@ class TicketDetailViewController: UIViewController, ARSCNViewDelegate, ARSession
           print ("Mapping started")
           mappingStarted = true
           loadMap(map: self.map!, tickets: self.delegate!.ticketDetailTickets(viewController: self))
-          //          LibPlacenote.instance.stopSession()
-          //          LibPlacenote.instance.startSession()
         }
       }
       status = "Ready"
@@ -275,6 +274,7 @@ class TicketDetailViewController: UIViewController, ARSCNViewDelegate, ARSession
         if let tappedNode = hits.first?.node {
           if let ticket = shapeManager.getTicket(position: tappedNode.position) {
             selectedTicket = ticket
+            LibPlacenote.instance.stopSession()
             performSegue(withIdentifier: "showExistingTicket", sender: self)
           } else {
             print ("Ticket not found.")

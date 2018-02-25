@@ -19,6 +19,7 @@ class PlaceTicketLocationViewController: UIViewController, ARSCNViewDelegate, AR
   
   @IBOutlet weak var scnView: ARSCNView!
   @IBOutlet weak var statusLabel: UILabel!
+  @IBOutlet weak var cancelButton: CancelButton!
   
   var map: Map!
   var content: String!
@@ -37,6 +38,7 @@ class PlaceTicketLocationViewController: UIViewController, ARSCNViewDelegate, AR
   
   private var shapeManager: ShapeManager!
   private var tapRecognizer: UITapGestureRecognizer? = nil //initialized after view is loaded
+  private var clearButtonRecognizer: UITapGestureRecognizer!
 
   
   // PlacenoteSDK features & helpers
@@ -57,6 +59,11 @@ class PlaceTicketLocationViewController: UIViewController, ARSCNViewDelegate, AR
     tapRecognizer!.isEnabled = false
     scnView.addGestureRecognizer(tapRecognizer!)
     
+    clearButtonRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleClear))
+    clearButtonRecognizer.numberOfTapsRequired = 1
+    clearButtonRecognizer.isEnabled = true
+    cancelButton.addGestureRecognizer(clearButtonRecognizer)
+    
     // set Placenote delegate
     LibPlacenote.instance.multiDelegate.addDelegate(delegate: self)
     
@@ -64,6 +71,9 @@ class PlaceTicketLocationViewController: UIViewController, ARSCNViewDelegate, AR
   }
   
   func loadMap(map: Map) {
+    if LibPlacenote.instance.getMappingStatus() == .running {
+      LibPlacenote.instance.stopSession()
+    }
     LibPlacenote.instance.loadMap(
       mapId: map.placenoteId,
       downloadProgressCb: {(completed: Bool, faulted: Bool, percentage: Float) -> Void in
@@ -111,7 +121,7 @@ class PlaceTicketLocationViewController: UIViewController, ARSCNViewDelegate, AR
     scnView.isPlaying = true
     scnView.debugOptions = []
     
-//    scnView.debugOptions = ARSCNDebugOptions.showFeaturePoints
+    scnView.debugOptions = ARSCNDebugOptions.showFeaturePoints
 //    scnView.debugOptions = ARSCNDebugOptions.showWorldOrigin
   }
   
@@ -233,8 +243,11 @@ class PlaceTicketLocationViewController: UIViewController, ARSCNViewDelegate, AR
     self.delegate?.placeTicketDidFinish(viewController: self)
   }
   
+  @objc func handleClear(sender: UITapGestureRecognizer) {
+    self.shapeManager.clearShapes()
+  }
+  
   @objc func handleTap(sender: UITapGestureRecognizer) {
-    print ("HANDLING TAP")
     if sender.state == .ended {
       let tapLocation = sender.location(in: scnView)
       let hitTestResults = scnView.hitTest(tapLocation, types: .featurePoint)
