@@ -168,7 +168,6 @@
         <!--Map Tickets Table View Controller-->
         <scene sceneID="gIH-JL-eyQ">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dhz-Jg-46L" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="MJk-Us-tBk" customClass="MapTicketsTableViewController" customModule="PlacenoteSDK" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="L4m-Rl-rR4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -183,7 +182,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="2jL-pf-k4k" kind="show" identifier="showTicketDetailSegue" id="Lr8-qG-du5"/>
+                                    <segue destination="2jL-pf-k4k" kind="showDetail" identifier="showTicketDetailSegue" id="07P-D4-SK6"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -205,9 +204,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="0gW-3f-T4B" kind="presentation" identifier="createTicketSegue" id="yrT-hm-GBs"/>
+                        <segue destination="o5R-l1-hW1" kind="presentation" identifier="createTicketSegue" id="QnM-Q2-tp9"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dhz-Jg-46L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="977" y="42"/>
         </scene>
@@ -288,6 +288,84 @@
             <point key="canvasLocation" x="3209" y="44"/>
         </scene>
         <!--Navigation Controller-->
+        <scene sceneID="464-9Q-tZh">
+            <objects>
+                <navigationController id="o5R-l1-hW1" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="qS2-Vs-3KJ">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="lDJ-fB-46V" kind="relationship" relationship="rootViewController" id="qKh-7K-sTT"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jt7-HL-gnB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="364" y="822"/>
+        </scene>
+        <!--Create Ticket View Controller-->
+        <scene sceneID="oOj-2k-km1">
+            <objects>
+                <viewController id="lDJ-fB-46V" customClass="CreateTicketViewController" customModule="PlacenoteSDK" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5KB-os-duA"/>
+                        <viewControllerLayoutGuide type="bottom" id="arc-Ya-npR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hl3-oh-cWd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Describe your problem" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AE0-Ve-Khk">
+                                <rect key="frame" x="16" y="78" width="186" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Pb-9u-qMO">
+                                <rect key="frame" x="17" y="343" width="90" height="30"/>
+                                <state key="normal" title="Add Location"/>
+                                <connections>
+                                    <action selector="addLocation:" destination="lDJ-fB-46V" eventType="touchUpInside" id="Nv3-gE-rNd"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wy2-p0-Xoy">
+                                <rect key="frame" x="16" y="107" width="343" height="228"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="228" id="9wW-Wq-8Ow"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="AE0-Ve-Khk" firstAttribute="leading" secondItem="hl3-oh-cWd" secondAttribute="leading" constant="16" id="9ID-A4-YbQ"/>
+                            <constraint firstItem="wy2-p0-Xoy" firstAttribute="top" secondItem="AE0-Ve-Khk" secondAttribute="bottom" constant="8" id="YvS-DZ-0Zm"/>
+                            <constraint firstItem="4Pb-9u-qMO" firstAttribute="top" secondItem="wy2-p0-Xoy" secondAttribute="bottom" constant="8" id="g0J-CN-qpc"/>
+                            <constraint firstItem="4Pb-9u-qMO" firstAttribute="leading" secondItem="hl3-oh-cWd" secondAttribute="leading" constant="17" id="gPR-OQ-uab"/>
+                            <constraint firstAttribute="trailing" secondItem="wy2-p0-Xoy" secondAttribute="trailing" constant="16" id="nw2-e0-qMY"/>
+                            <constraint firstItem="wy2-p0-Xoy" firstAttribute="leading" secondItem="hl3-oh-cWd" secondAttribute="leading" constant="16" id="sZE-Ns-MTQ"/>
+                            <constraint firstItem="AE0-Ve-Khk" firstAttribute="top" secondItem="5KB-os-duA" secondAttribute="bottom" constant="14" id="ziJ-hn-Mwi"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="3d6-Ju-rJX">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="9Yo-GR-V5z">
+                            <connections>
+                                <action selector="cancelCreateTicket:" destination="lDJ-fB-46V" id="82a-GY-Kfz"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="textView" destination="wy2-p0-Xoy" id="UCo-eZ-Sur"/>
+                        <segue destination="0gW-3f-T4B" kind="presentation" identifier="showPlaceTicketLocationSegue" id="gew-Zb-glD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eYY-jJ-DaF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1237.5999999999999" y="821.73913043478262"/>
+        </scene>
+        <!--Navigation Controller-->
         <scene sceneID="Nix-TW-Hua">
             <objects>
                 <navigationController id="0gW-3f-T4B" sceneMemberID="viewController">
@@ -301,12 +379,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RGX-vn-yfa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="25" y="820"/>
+            <point key="canvasLocation" x="2156" y="818"/>
         </scene>
         <!--New Ticket-->
         <scene sceneID="4Q7-CV-36D">
             <objects>
-                <viewController id="PB1-DJ-fIf" customClass="CreateTicketViewController" customModule="PlacenoteSDK" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="PB1-DJ-fIf" customClass="PlaceTicketLocationViewController" customModule="PlacenoteSDK" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mq3-RN-dna"/>
                         <viewControllerLayoutGuide type="bottom" id="oFc-Kz-YtQ"/>
@@ -347,7 +425,7 @@
                                 <action selector="cancel:" destination="PB1-DJ-fIf" id="M2b-L8-Dkm"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="hH2-jr-Pee">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="hH2-jr-Pee">
                             <connections>
                                 <action selector="save:" destination="PB1-DJ-fIf" id="6Wd-EX-J5B"/>
                             </connections>
@@ -360,7 +438,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BNb-Go-Nvx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="976.79999999999995" y="819.94002998500753"/>
+            <point key="canvasLocation" x="3052" y="817"/>
         </scene>
         <!--Create Place-->
         <scene sceneID="ao3-Gj-Sz4">
@@ -542,7 +620,6 @@
         <!--Navigation Controller-->
         <scene sceneID="Xvd-QO-fsI">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="djC-4U-kqx" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wEz-dj-kDp" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="KJP-uf-20y">
@@ -554,6 +631,7 @@
                         <segue destination="MJk-Us-tBk" kind="relationship" relationship="rootViewController" id="LxT-bJ-vSi"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="djC-4U-kqx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="83.200000000000003" y="42.278860569715143"/>
         </scene>

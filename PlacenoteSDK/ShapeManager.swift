@@ -80,10 +80,10 @@ class ShapeManager {
     self.maxShapes = max
   }
   
-  func saveShapes() {
+  func saveShapes(content: String) {
     if (shapePositions.count > 0) {
       for i in 0...(shapePositions.count-1) {
-        Ticket.create(map: self.map, content: "this is a ticket", x: shapePositions[i].x, y: shapePositions[i].y, z: shapePositions[i].z)
+        Ticket.create(map: self.map, content: content, x: shapePositions[i].x, y: shapePositions[i].y, z: shapePositions[i].z)
       }
     }
     

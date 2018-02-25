@@ -85,14 +85,13 @@ class MapTicketsTableViewController: UITableViewController, CreateTicketViewCont
   
   // MARK: - CreateTicketViewController
   
-  func createTickedDidFinish(viewController: CreateTicketViewController) {
-    viewController.dismiss(animated: true, completion: nil)
-  }
-  
   func createTicketDidCancel(viewController: CreateTicketViewController) {
     viewController.dismiss(animated: true, completion: nil)
   }
-
+  
+  func createTicketDidFinish(viewController: CreateTicketViewController) {
+    viewController.dismiss(animated: true, completion: nil)
+  }
   
   /*
    // Override to support conditional editing of the table view.
